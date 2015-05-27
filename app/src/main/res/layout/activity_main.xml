@@ -25,14 +25,15 @@
         android:layout_height="wrap_content"
         android:id="@+id/infoAutor"
         android:text="Info o autorovi"
+        android:onClick="songPicked"
         />
 
 
-    <ListView
-        android:id="@+id/songList"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content" >
-    </ListView>
+    <View android:id="@+id/player_control"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true">
+    </View >
 
 
 </LinearLayout>

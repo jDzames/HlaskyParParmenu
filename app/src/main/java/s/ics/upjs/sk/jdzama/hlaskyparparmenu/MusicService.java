@@ -23,9 +23,9 @@ import android.util.Log;
  * Sue Smith - February 2014
  */
 
-public class MusicService extends Service /*implements
+public class MusicService extends Service implements
         MediaPlayer.OnPreparedListener, MediaPlayer.OnErrorListener,
-        MediaPlayer.OnCompletionListener */{
+        MediaPlayer.OnCompletionListener {
 
     //media player
     private MediaPlayer player;
@@ -46,11 +46,11 @@ public class MusicService extends Service /*implements
     public void onCreate(){
         //create the service
         super.onCreate();
-
-        //initialize position
-        songPosn=rand.nextInt(50);
         //random
         rand=new Random();
+        //initialize position
+        songPosn=rand.nextInt(50);
+
         //create player
         player = new MediaPlayer();
         //initialize
@@ -59,13 +59,13 @@ public class MusicService extends Service /*implements
 
     public void initMusicPlayer(){
         //set player properties
-        //player.setWakeMode(getApplicationContext(),PowerManager.PARTIAL_WAKE_LOCK);
+        player.setWakeMode(getApplicationContext(),PowerManager.PARTIAL_WAKE_LOCK);
         //player.setAudioStreamType(AudioManager.STREAM_MUSIC);
         //set listeners
-        /*player.setOnPreparedListener(this);
+        player.setOnPreparedListener(this);
         player.setOnCompletionListener(this);
-        player.setOnErrorListener(this);*/
-        playSong();
+        player.setOnErrorListener(this);
+        //playSong();
     }
 
     //pass song list
@@ -124,7 +124,7 @@ public class MusicService extends Service /*implements
         }
         //player.prepareAsync();
         player.start();
-        //notification();
+        notification();
     }
 
     //set the song
@@ -132,8 +132,9 @@ public class MusicService extends Service /*implements
         songPosn=songIndex;
     }
 
-    /*@Override
+    @Override
     public void onCompletion(MediaPlayer mp) {
+        Log.wtf("MUSIC SERVICE", "COMPLETED");
         //check if playback has reached the end of a track
         if(player.getCurrentPosition()>0){
             mp.reset();
@@ -154,7 +155,7 @@ public class MusicService extends Service /*implements
         //mp.start();
 
         //notification();
-    }*/
+    }
 
     private void notification(){
         //notification
@@ -194,6 +195,7 @@ public class MusicService extends Service /*implements
 
     public void seek(int posn){
         player.seekTo(posn);
+        Log.wtf("POSITION: ",""+player.getCurrentPosition());
     }
 
     public void go(){
@@ -202,8 +204,15 @@ public class MusicService extends Service /*implements
 
     //skip to previous track
     public void playPrev(){
-        songPosn--;
-        if(songPosn<0) songPosn=songs.size()-1;
+        /*songPosn--;
+        if(songPosn<0) songPosn=songs.size()-1;*/
+
+        int newSong = songPosn;
+        while(newSong==songPosn){
+            newSong=rand.nextInt(songs.size());
+        }
+        songPosn=newSong;
+
         playSong();
     }
 

@@ -32,7 +32,7 @@ public class MainActivity extends ActionBarActivity implements MediaPlayerContro
 
     private Intent playIntent;
     private Button hlaskyBtn;
-    private ListView listView;
+    private View controlerView;
 
 
     @Override
@@ -41,15 +41,13 @@ public class MainActivity extends ActionBarActivity implements MediaPlayerContro
         setContentView(R.layout.activity_main);
 
         hlaskyBtn = (Button) findViewById(R.id.hlasky);
-        listView = (ListView) findViewById(R.id.songList);
+        controlerView = (View) findViewById(R.id.player_control);
 
 
         //nacitaj lasky
         getSongList();
         //nastav controller hudby
-        setController();
-
-
+        //setController();
 
     }
 
@@ -62,18 +60,13 @@ public class MainActivity extends ActionBarActivity implements MediaPlayerContro
     @Override
     protected void onStart() {
         super.onStart();
-        hlaskyBtn.setText("zmeneny222!!!");
-        /*if(playIntent==null){
-            hlaskyBtn.setText("zmeneny333!!!");
+        Log.wtf(null,"on start");
+        if(playIntent==null){
             playIntent = new Intent(this, MusicService.class);
             bindService(playIntent, musicConnection, Context.BIND_AUTO_CREATE);
-            //startService(playIntent);
-        }*/
-
-        /*musicService.playSong();
-        setController();
-        playbackPaused=false;
-        controller.show(0);*/
+            startService(playIntent);
+        }
+        Log.wtf(null,"player bound");
     }
 
     //connect to the service
@@ -104,7 +97,8 @@ public class MainActivity extends ActionBarActivity implements MediaPlayerContro
 
     private void setController(){
         // controller up
-        controller = new MusicController(this);
+        if (controller == null)
+            controller = new MusicController(this, false);
         //listeners
         controller.setPrevNextListeners(
                 new View.OnClickListener() {
@@ -120,8 +114,9 @@ public class MainActivity extends ActionBarActivity implements MediaPlayerContro
             }
         });
         //playback
+
         controller.setMediaPlayer(this);
-        controller.setAnchorView(listView);
+        controller.setAnchorView(controlerView);
         controller.setEnabled(true);
         Log.wtf(null,"controller");
         //controller.show(0);
@@ -142,10 +137,24 @@ public class MainActivity extends ActionBarActivity implements MediaPlayerContro
         return super.onOptionsItemSelected(item);
     }
 
+    public void songPicked(View view){
+
+        musicService.playSong();
+        if(playbackPaused || controller == null){
+            setController();
+            playbackPaused=false;
+        }
+        controller.show(0);
+    }
+
     @Override
     protected void onPause(){
         super.onPause();
         paused=true;
+
+        SingletonData.INSTANCE.hide = true;
+        controller.hide();
+
     }
 
     @Override
@@ -177,19 +186,10 @@ public class MainActivity extends ActionBarActivity implements MediaPlayerContro
         controller.show(0);
     }
 
-    public void songPicked(View view){
-        musicService.setSong(Integer.parseInt(view.getTag().toString()));
-        musicService.playSong();
-        if(playbackPaused){
-            setController();
-            playbackPaused=false;
-        }
-        controller.show(0);
-    }
-
     @Override
     public void start() {
-        musicService.playSong();//.go();
+        musicService.go();//.playSong();
+        playbackPaused=false;
     }
 
     @Override
@@ -216,7 +216,14 @@ public class MainActivity extends ActionBarActivity implements MediaPlayerContro
 
     @Override
     public void seekTo(int i) {
-        musicService.seek(i);
+        if (playbackPaused){
+            musicService.go();
+            musicService.seek(i);
+        } else{
+            musicService.seek(i);
+        }
+
+        //musicService.go();
     }
 
     @Override

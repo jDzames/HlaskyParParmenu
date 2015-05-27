@@ -12,8 +12,15 @@ public class MusicController extends MediaController {
         super(context);
     }
 
+    public MusicController(Context context, boolean show) {
+        super(context, show);
+    }
+
     @Override
     public void hide() {
-
+        if (SingletonData.INSTANCE.hide){
+            SingletonData.INSTANCE.hide = false;
+            super.hide();
+        }
     }
 }
