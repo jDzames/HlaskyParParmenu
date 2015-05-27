@@ -24,7 +24,7 @@ import android.util.Log;
  */
 
 public class MusicService extends Service implements
-        MediaPlayer.OnPreparedListener, MediaPlayer.OnErrorListener,
+        MediaPlayer.OnErrorListener,
         MediaPlayer.OnCompletionListener {
 
     //media player
@@ -38,7 +38,7 @@ public class MusicService extends Service implements
     //title of current song
     private String songTitle="";
     //notification id
-    private static final int NOTIFY_ID=1;
+    public static final int NOTIFY_ID=1;
     //shuffle flag and random
     private boolean shuffle=true;
     private Random rand;
@@ -62,15 +62,47 @@ public class MusicService extends Service implements
         player.setWakeMode(getApplicationContext(),PowerManager.PARTIAL_WAKE_LOCK);
         //player.setAudioStreamType(AudioManager.STREAM_MUSIC);
         //set listeners
-        player.setOnPreparedListener(this);
         player.setOnCompletionListener(this);
         player.setOnErrorListener(this);
+        //player.setOnPreparedListener(this);
         //playSong();
     }
 
     //pass song list
     public void setList(ArrayList<Song> theSongs){
         songs=theSongs;
+    }
+
+    public void playSongAtPos(int songId, int position) {
+        //play
+        if (player == null){
+            player = new MediaPlayer();
+            //initialize
+            initMusicPlayer();
+        }
+        player.reset();
+        //get song
+        if (songs==null){
+            if(HlaskyList.INSTANCE.hlaskyVsetky==null){
+                HlaskyList.INSTANCE.makeList();
+            }
+            songs = HlaskyList.INSTANCE.hlaskyVsetky;
+        }
+        songPosn = songId;
+        Song playSong = songs.get(songPosn);
+        //get title
+        songTitle=playSong.getTitle();
+        //get id
+        long currSong = playSong.getID();
+        try{
+            player = MediaPlayer.create(this, (int)currSong);
+        }
+        catch(Exception e){
+            Log.e("MUSIC SERVICE", "Error setting data source", e);
+        }
+        player.start();
+        player.seekTo(position);
+        notification();
     }
 
     //binder
@@ -91,12 +123,19 @@ public class MusicService extends Service implements
     public boolean onUnbind(Intent intent){
         player.stop();
         player.release();
+        player = null;
+        stopSelf();
         return false;
     }
 
     //play a song
     public void playSong(){
         //play
+        if (player == null){
+            player = new MediaPlayer();
+            //initialize
+            initMusicPlayer();
+        }
         player.reset();
         //get song
         if (songs==null){
@@ -110,19 +149,12 @@ public class MusicService extends Service implements
         songTitle=playSong.getTitle();
         //get id
         long currSong = playSong.getID();
-        //set uri
-        /*Uri trackUri = ContentUris.withAppendedId(
-                android.provider.MediaStore.Audio.Media.EXTERNAL_CONTENT_URI,
-                currSong);*/
-        //set the data source
         try{
-            //player.setDataSource(getApplicationContext(), trackUri);
             player = MediaPlayer.create(this, (int)currSong);
         }
         catch(Exception e){
             Log.e("MUSIC SERVICE", "Error setting data source", e);
         }
-        //player.prepareAsync();
         player.start();
         notification();
     }
@@ -136,10 +168,8 @@ public class MusicService extends Service implements
     public void onCompletion(MediaPlayer mp) {
         Log.wtf("MUSIC SERVICE", "COMPLETED");
         //check if playback has reached the end of a track
-        if(player.getCurrentPosition()>0){
-            mp.reset();
-            playNext();
-        }
+        mp.reset();
+        playNext();
     }
 
     @Override
@@ -149,13 +179,13 @@ public class MusicService extends Service implements
         return false;
     }
 
-    @Override
+    /*@Override
     public void onPrepared(MediaPlayer mp) {
         //start playback
         //mp.start();
 
         //notification();
-    }
+    }*/
 
     private void notification(){
         //notification
@@ -174,6 +204,10 @@ public class MusicService extends Service implements
                 .setContentText(songTitle);
         Notification not = builder.getNotification();
         startForeground(NOTIFY_ID, not);
+    }
+
+    public int getSong(){
+        return songPosn;
     }
 
     //playback methods
@@ -204,9 +238,6 @@ public class MusicService extends Service implements
 
     //skip to previous track
     public void playPrev(){
-        /*songPosn--;
-        if(songPosn<0) songPosn=songs.size()-1;*/
-
         int newSong = songPosn;
         while(newSong==songPosn){
             newSong=rand.nextInt(songs.size());
@@ -230,6 +261,7 @@ public class MusicService extends Service implements
     @Override
     public void onDestroy() {
         stopForeground(true);
+        super.onDestroy();
     }
 
 
