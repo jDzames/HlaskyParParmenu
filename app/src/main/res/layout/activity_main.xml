@@ -27,16 +27,18 @@
         android:text="Info o autorovi"
         />
 
+    <TextView
+        android:id="@+id/songInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textSize="27sp"
+        android:layout_alignParentBottom="true"/>
 
     <View android:id="@+id/player_control"
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true">
     </View >
-
-    <MediaController android:id="@+id/music_controller"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:visibility="visible"/>
 
 </LinearLayout>

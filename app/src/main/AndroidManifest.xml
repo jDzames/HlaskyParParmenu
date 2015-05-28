@@ -13,6 +13,8 @@
         android:theme="@style/AppTheme" >
         <activity
             android:name=".MainActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -20,6 +22,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <!--receiver- android:name=".BroadcastReceiver" >
+            <intent-filter>
+                <action android:name="s.ics.upjs.sk.jdzama.hlaskyparparmenu.TRACK_INFO_INTENT" >
+                </action>
+            </intent-filter>
+        </receiver-->
 
         <service
             android:name=".MusicService"

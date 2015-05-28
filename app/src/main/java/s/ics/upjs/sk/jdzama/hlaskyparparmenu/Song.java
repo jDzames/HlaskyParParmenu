@@ -10,8 +10,8 @@ package s.ics.upjs.sk.jdzama.hlaskyparparmenu;
 public class Song {
 
     private long id;
-    private String title;
-    private String artist;
+    public String title;
+    public String artist;
 
     public Song(long songID, String songTitle, String songArtist){
         id=songID;

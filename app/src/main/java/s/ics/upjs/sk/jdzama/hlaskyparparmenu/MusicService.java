@@ -15,6 +15,7 @@ import android.os.Binder;
 import android.os.IBinder;
 import android.os.PowerManager;
 import android.util.Log;
+import android.view.View;
 
 /*
  * This is demo code to accompany the Mobiletuts+ series:
@@ -35,8 +36,9 @@ public class MusicService extends Service implements
     private int songPosn;
     //binder
     private final IBinder musicBind = new MusicBinder();
-    //title of current song
+    //title and author of current song
     private String songTitle="";
+    private String songAuthor="";
     //notification id
     public static final int NOTIFY_ID=1;
     //shuffle flag and random
@@ -90,8 +92,9 @@ public class MusicService extends Service implements
         }
         songPosn = songId;
         Song playSong = songs.get(songPosn);
-        //get title
+        //get title and author
         songTitle=playSong.getTitle();
+        songAuthor = playSong.getArtist();
         //get id
         long currSong = playSong.getID();
         try{
@@ -145,8 +148,9 @@ public class MusicService extends Service implements
             songs = HlaskyList.INSTANCE.hlaskyVsetky;
         }
         Song playSong = songs.get(songPosn);
-        //get title
+        //get title and author
         songTitle=playSong.getTitle();
+        songAuthor = playSong.getArtist();
         //get id
         long currSong = playSong.getID();
         try{
@@ -157,6 +161,7 @@ public class MusicService extends Service implements
         }
         player.start();
         notification();
+        player.setOnCompletionListener(this);
     }
 
     //set the song
@@ -170,6 +175,14 @@ public class MusicService extends Service implements
         //check if playback has reached the end of a track
         mp.reset();
         playNext();
+        broadcastIntent(null);
+    }
+
+    public void broadcastIntent(View view)
+    {
+        Intent intent = new Intent();
+        intent.setAction("s.ics.upjs.sk.jdzama.hlaskyparparmenu.TRACK_INFO_INTENT");
+        sendBroadcast(intent);
     }
 
     @Override
@@ -206,6 +219,22 @@ public class MusicService extends Service implements
         startForeground(NOTIFY_ID, not);
     }
 
+    public String getSongTitle(){
+        Log.wtf("SERVICE TITLE           ", "je " + songAuthor.toString());
+        if (songTitle==null){
+            songTitle="";
+        }
+        return songTitle;
+    }
+
+    public String getSongAuthor(){
+        Log.wtf("SERVICE AUTHOR           ","je "+songAuthor.toString());
+        if (songAuthor==null){
+            songAuthor="";
+        }
+        return songAuthor;
+    }
+
     public int getSong(){
         return songPosn;
     }
@@ -229,7 +258,7 @@ public class MusicService extends Service implements
 
     public void seek(int posn){
         player.seekTo(posn);
-        Log.wtf("POSITION: ",""+player.getCurrentPosition());
+        Log.wtf("POSITION: ", "" + player.getCurrentPosition());
     }
 
     public void go(){
@@ -263,7 +292,6 @@ public class MusicService extends Service implements
         stopForeground(true);
         super.onDestroy();
     }
-
 
 }
 

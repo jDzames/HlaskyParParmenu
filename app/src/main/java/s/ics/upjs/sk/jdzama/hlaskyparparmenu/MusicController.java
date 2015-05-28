@@ -45,6 +45,6 @@ public class MusicController extends MediaController {
         super.onConfigurationChanged(newConfig);
         super.hide();
         Log.wtf("CONTROLLER: ", "som v ROTATE ");
-       // ((Activity) getContext()).finish();
+        // ((Activity) getContext()).finish();
     }
 }

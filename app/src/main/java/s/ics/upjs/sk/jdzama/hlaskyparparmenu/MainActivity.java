@@ -2,14 +2,17 @@ package s.ics.upjs.sk.jdzama.hlaskyparparmenu;
 
 import android.app.Activity;
 import android.app.NotificationManager;
+import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.ServiceConnection;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -17,6 +20,7 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.MediaController.MediaPlayerControl;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
@@ -39,6 +43,10 @@ public class MainActivity extends ActionBarActivity implements MediaPlayerContro
 
     public final String SAVED_STATE = "savedState";
     private SaveData data;
+    private TextView songInfo;
+
+    private final String adviceToPlay = new String("Pre prehrávanie stlačte play");
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +55,11 @@ public class MainActivity extends ActionBarActivity implements MediaPlayerContro
 
         hlaskyBtn = (Button) findViewById(R.id.hlasky);
         controlerView = (View) findViewById(R.id.player_control);
+        songInfo = (TextView) findViewById(R.id.songInfo);
+        setTextView();
+
+        IntentFilter intentFilter = new IntentFilter("s.ics.upjs.sk.jdzama.hlaskyparparmenu.TRACK_INFO_INTENT");
+        registerReceiver(myReceiver, intentFilter);
 
         //nacitaj hlasky
         getSongList();
@@ -57,6 +70,11 @@ public class MainActivity extends ActionBarActivity implements MediaPlayerContro
             restoreMusicState(savedInstanceState);
         }
         Log.wtf("ACTIVITY: ","CREATED ");
+    }
+
+    private void setTextView(){
+        songInfo.setGravity(Gravity.CENTER);
+        songInfo.setText(adviceToPlay);
     }
 
     @Override
@@ -134,6 +152,7 @@ public class MainActivity extends ActionBarActivity implements MediaPlayerContro
     @Override
     protected void onDestroy() {
         Log.wtf("ACTIVITY: ","som v DESTROY ");
+        unregisterReceiver(myReceiver);
         super.onDestroy();
     }
 
@@ -144,6 +163,7 @@ public class MainActivity extends ActionBarActivity implements MediaPlayerContro
 
             controller=null;
         }
+        songInfo.setText(adviceToPlay);
 
         if (musicBound) {
             try {
@@ -186,7 +206,7 @@ public class MainActivity extends ActionBarActivity implements MediaPlayerContro
         if(playIntent==null){
             playIntent = new Intent(this, MusicService.class);
             bindService(playIntent, musicConnection, Context.BIND_AUTO_CREATE);
-            startService(playIntent);
+            //startService(playIntent);
             Log.wtf("ACTIVITY: ","player bound");
         }
     }
@@ -205,6 +225,11 @@ public class MainActivity extends ActionBarActivity implements MediaPlayerContro
             playbackPaused=false;
         }
         controller.show(0);
+        setTrackInfo();
+    }
+
+    public void setTrackInfo(){
+        songInfo.setText(musicService.getSongAuthor()+" - "+musicService.getSongTitle());
     }
 
     //connect to the service
@@ -258,6 +283,14 @@ public class MainActivity extends ActionBarActivity implements MediaPlayerContro
         return super.onOptionsItemSelected(item);
     }
 
+    public BroadcastReceiver myReceiver = new BroadcastReceiver() {
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+
+            setTrackInfo();
+        }
+    };
 
 
     //////////////////////////////MUSIC PLAYER//////////////////////////////
@@ -269,6 +302,7 @@ public class MainActivity extends ActionBarActivity implements MediaPlayerContro
             playbackPaused=false;
         }
         controller.show(0);
+        setTrackInfo();
     }
 
     private void playPrev(){
@@ -278,6 +312,7 @@ public class MainActivity extends ActionBarActivity implements MediaPlayerContro
             playbackPaused=false;
         }
         controller.show(0);
+        setTrackInfo();
     }
 
     @Override
