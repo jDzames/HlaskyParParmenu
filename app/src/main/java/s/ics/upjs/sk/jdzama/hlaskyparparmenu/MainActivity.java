@@ -45,7 +45,7 @@ public class MainActivity extends ActionBarActivity implements MediaPlayerContro
     private SaveData data;
     private TextView songInfo;
 
-    private final String adviceToPlay = new String("Pre prehrávanie stlačte play");
+    private final String adviceToPlay = new String("Pre náhodné prehrávanie stlačte play");
 
 
     @Override
@@ -284,14 +284,16 @@ public class MainActivity extends ActionBarActivity implements MediaPlayerContro
     }
 
     public BroadcastReceiver myReceiver = new BroadcastReceiver() {
-
         @Override
         public void onReceive(Context context, Intent intent) {
-
             setTrackInfo();
-        }
-    };
+        }};
 
+    public void startHlaskyActivity(View view){
+        Intent hlaskyActivityIntent = new Intent(MainActivity.this, HlaskyActivity.class);
+        hlaskyActivityIntent.putExtra("key", "pustene"); //Optional parameters
+        MainActivity.this.startActivity(hlaskyActivityIntent);
+    }
 
     //////////////////////////////MUSIC PLAYER//////////////////////////////
 

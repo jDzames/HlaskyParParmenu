@@ -4,20 +4,28 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin" tools:context=".MainActivity"
+    android:background="@drawable/background"
     android:orientation="vertical">
+    <!--android:background="@android:color/darker_gray"
+    -->
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/hlasky"
         android:text="Hlášky"
+        android:onClick="startHlaskyActivity"
+        android:textColor="@android:color/secondary_text_light"
+        android:textSize="20sp"
         />
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/infoFilm"
-        android:text="Viac o Par parmenoch"
+        android:text="Viac o Pár pařmenoch"
+        android:textColor="@android:color/secondary_text_light"
+        android:textSize="20sp"
         />
 
     <Button
@@ -25,6 +33,8 @@
         android:layout_height="wrap_content"
         android:id="@+id/infoAutor"
         android:text="Info o autorovi"
+        android:textColor="@android:color/secondary_text_light"
+        android:textSize="20sp"
         />
 
     <TextView
@@ -32,7 +42,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:textSize="27sp"
+        android:textSize="25sp"
+        android:textColor="@android:color/background_light"
         android:layout_alignParentBottom="true"/>
 
     <View android:id="@+id/player_control"

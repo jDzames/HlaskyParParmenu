@@ -85,7 +85,7 @@ public enum HlaskyList {
     };
     public final Song[] hlaskySpolocesntvaTentonancu = {new Song(R.raw.urvetitoruce, "Urve ti to ruce", "Choboti"),
             new Song(R.raw.nabenzinku, "Do Roklinky, na benzínku", "Hobitofil ft. Choboti"),
-            new Song(R.raw.slusimito, "Sluší mi to?", "Legolas"),
+            new Song(R.raw.slusimito, "Sluší mi to?", "Legoland"),
             new Song(R.raw.umimvarit, "Ja umím vařit", "Slim"),
             new Song(R.raw.jsemdebil, "Ja jsem debil", "Chobot"),
             new Song(R.raw.trosku, "Tak trošku...", "Chobot"),
@@ -93,11 +93,11 @@ public enum HlaskyList {
             new Song(R.raw.spravnedojidelny, "Jdem tady správne do jídelny", "Choboti"),
             new Song(R.raw.fotbal, "Pozvani na fotbal", "Pajzl"),
             new Song(R.raw.ufo, "UFO", "Spoločenstvo tentonancu"),
-            new Song(R.raw.veverkysemsti, "Veverky se mstí", "Legolas"),
+            new Song(R.raw.veverkysemsti, "Veverky se mstí", "Legoland"),
             new Song(R.raw.jetomagor, "Je to magor", "Slim ft. Hobitofil"),
             new Song(R.raw.geronimooo, "Geronimooo", "Pajzl"),
             new Song(R.raw.ukrastvousy, "Chtejí mi ukrást vousy", "Pajzl"),
-            new Song(R.raw.podmediskutovat, "Podme vo tom diskutovat", "Legolas")
+            new Song(R.raw.podmediskutovat, "Podme vo tom diskutovat", "Legoland")
     };
     public final Song[] hlaskyVLothoriene = {new Song(R.raw.bohatymberu, "Bohatým beru, na chudé seru", "Babin Hud"),
             new Song(R.raw.nehybapusou, "Kecám a nehýbam pusou", "Galadriel"),

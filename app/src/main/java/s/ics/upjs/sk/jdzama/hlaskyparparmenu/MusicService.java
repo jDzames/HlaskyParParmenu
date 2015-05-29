@@ -51,7 +51,7 @@ public class MusicService extends Service implements
         //random
         rand=new Random();
         //initialize position
-        songPosn=rand.nextInt(50);
+        songPosn=rand.nextInt(102);
 
         //create player
         player = new MediaPlayer();
@@ -105,7 +105,8 @@ public class MusicService extends Service implements
         }
         player.start();
         player.seekTo(position);
-        notification();
+        //notification();
+        player.setOnCompletionListener(this);
     }
 
     //binder
@@ -160,7 +161,7 @@ public class MusicService extends Service implements
             Log.e("MUSIC SERVICE", "Error setting data source", e);
         }
         player.start();
-        notification();
+        //notification();
         player.setOnCompletionListener(this);
     }
 
@@ -220,7 +221,7 @@ public class MusicService extends Service implements
     }
 
     public String getSongTitle(){
-        Log.wtf("SERVICE TITLE           ", "je " + songAuthor.toString());
+        Log.wtf("SERVICE TITLE           ", "je " + songTitle.toString()+" cislo je  "+songs.size());
         if (songTitle==null){
             songTitle="";
         }
