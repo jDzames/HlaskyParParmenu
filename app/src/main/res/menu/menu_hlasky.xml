@@ -3,4 +3,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="s.ics.upjs.sk.jdzama.hlaskyparparmenu.HlaskyActivity">
 
+    <item android:id="@+id/action_stop"
+        android:title="Stop"
+        android:icon="@drawable/end"
+        android:orderInCategory="0"
+        app:showAsAction="always|withText" />ľ
+
 </menu>

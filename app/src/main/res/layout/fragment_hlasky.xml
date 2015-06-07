@@ -3,8 +3,9 @@
     android:layout_height="match_parent"
     tools:context="s.ics.upjs.sk.jdzama.hlaskyparparmenu.HlaskyFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView android:layout_width="match_parent" android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+    <ListView
+        android:id="@+id/hlaskyListView"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" />
 
 </FrameLayout>

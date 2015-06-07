@@ -1,11 +1,12 @@
 package s.ics.upjs.sk.jdzama.hlaskyparparmenu;
 
+import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.Context;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarActivity;
+import android.content.res.Configuration;
 import android.os.Bundle;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -24,7 +25,7 @@ import java.util.ArrayList;
 
 //http://codetheory.in/android-navigation-drawer/      -vela stade
 
-public class HlaskyActivity extends ActionBarActivity {
+public class HlaskyActivity extends Activity {
 
     private static String TAG = HlaskyActivity.class.getSimpleName();
 
@@ -32,7 +33,7 @@ public class HlaskyActivity extends ActionBarActivity {
     RelativeLayout mDrawerPane;
     private ActionBarDrawerToggle mDrawerToggle;
     public DrawerLayout mDrawerLayout;
-
+    private int positionFragment=0;
     ArrayList<NavItem> mNavItems = new ArrayList<NavItem>();
 
     @Override
@@ -40,14 +41,14 @@ public class HlaskyActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_hlasky);
 
-        mNavItems.add(new NavItem("Bobromil", "Boromir", R.drawable.parmenh));
+        mNavItems.add(new NavItem("Spoločenstvo tentonancu", "Členovia+mix", R.drawable.parmeni));
+        mNavItems.add(new NavItem("Bobromil", "Boromir", R.drawable.bobromil));
         mNavItems.add(new NavItem("Hobitofil", "Aragorn", R.drawable.parmenh));
         mNavItems.add(new NavItem("Fritol", "Frodo", R.drawable.parmenh));
         mNavItems.add(new NavItem("Šmajdalf", "Gandalf", R.drawable.parmeng));
-        mNavItems.add(new NavItem("Spoločenstvo tentonancu", "Členovia+mix", R.drawable.parmeni));
-        mNavItems.add(new NavItem("V ro(k)linke", "", R.drawable.parmenh));
-        mNavItems.add(new NavItem("V Lothoriene", "", R.drawable.parmenh));
-        mNavItems.add(new NavItem("Rozne", "", R.drawable.parmenh));
+        mNavItems.add(new NavItem("V ro(k)linke", "", R.drawable.elmond));
+        mNavItems.add(new NavItem("V Lothoriene", "", R.drawable.haldir));
+        mNavItems.add(new NavItem("Rôzne postavy", "", R.drawable.nazgul));
 
         // DrawerLayout
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
@@ -62,6 +63,7 @@ public class HlaskyActivity extends ActionBarActivity {
         mDrawerList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                positionFragment = position;
                 selectItemFromDrawer(position);
             }
         });
@@ -86,17 +88,38 @@ public class HlaskyActivity extends ActionBarActivity {
         mDrawerLayout.setDrawerListener(mDrawerToggle);
 
         // More info: http://codetheory.in/difference-between-setdisplayhomeasupenabled-sethomebuttonenabled-and-setdisplayshowhomeenabled/
-        getSupportActionBar().setHomeButtonEnabled(true);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getActionBar().setHomeButtonEnabled(true);
+        getActionBar().setDisplayHomeAsUpEnabled(true);
+        getActionBar().setDisplayShowHomeEnabled(false);
+
+        restoreInstanceState(savedInstanceState);
+
+        selectItemFromDrawer(positionFragment);
 
     }
 
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        Log.wtf("STATE  ","saveujem  "+positionFragment);
+        outState.putInt("POSITION", positionFragment);
+        super.onSaveInstanceState(outState);
+    }
+
+    protected void restoreInstanceState(Bundle savedInstanceState) {
+        Log.wtf("STATE  ","pred ifom");
+        if (savedInstanceState!=null){
+
+            positionFragment = (int) savedInstanceState.get("POSITION");
+            Log.wtf("STATE  ","v ife  "+positionFragment);
+        }
+    }
+
     /*
-    * Called when a particular item from the navigation drawer
-    * is selected.
-    * */
+            * Called when a particular item from the navigation drawer
+            * is selected.
+            * */
     private void selectItemFromDrawer(int position) {
-        Fragment fragment = new HlaskyFragment();
+        Fragment fragment = HlaskyFragment.newInstance(position);
 
         FragmentManager fragmentManager = getFragmentManager();
         fragmentManager.beginTransaction()
@@ -145,7 +168,7 @@ public class HlaskyActivity extends ActionBarActivity {
             return true;
         }
 
-        return super.onOptionsItemSelected(item);
+        return false;
     }
 
     public void backToMainActivity(View view) {
@@ -213,4 +236,8 @@ public class HlaskyActivity extends ActionBarActivity {
         }
     }
 
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+    }
 }

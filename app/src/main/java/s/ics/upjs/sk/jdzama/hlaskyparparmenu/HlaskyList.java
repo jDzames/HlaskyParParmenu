@@ -3,6 +3,7 @@ package s.ics.upjs.sk.jdzama.hlaskyparparmenu;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 /**
  * Created by jDzama on 18.5.2015.
@@ -11,7 +12,7 @@ import java.util.Arrays;
 public enum HlaskyList {
     INSTANCE;
 
-    public final Song[] hlaskyBobromil = {new Song(R.raw.bobromilveelky, "Bobromil veelky", "Bobromil"),
+    public final List<Song> hlaskyBobromil = Arrays.asList(new Song(R.raw.bobromilveelky, "Bobromil veelky", "Bobromil"),
             new Song(R.raw.mracit, "Ale teď se budu mračit", "Bobromil"),
             new Song(R.raw.parenivnadoru, "Pařeni v Nádoru", "Bobromil"),
             new Song(R.raw.prdnul, "Pardon, asi sem si prdnul", "Bobromil"),
@@ -25,8 +26,8 @@ public enum HlaskyList {
             new Song(R.raw.jakzijes, "Jak žiješ", "Hobitofil ft. Bobromil"),
             new Song(R.raw.kdybychtesjedli, "Kdybych te sjedli", "Hobitofil ft. Bobromil"),
             new Song(R.raw.sipyzhecu, "Šípy z hecu", "Bobromil ft. Hobitofil")
-    };
-    public final Song[] hlaskyFritol = {new Song(R.raw.kdeseflakas, "Kde se flákaš", "Fritol"),
+    );
+    public final List<Song> hlaskyFritol = Arrays.asList(new Song(R.raw.kdeseflakas, "Kde se flákaš", "Fritol"),
             new Song(R.raw.smiech, "Hehehuhu", "Fritol ft. Šmajdalf"),
             new Song(R.raw.nakupysmajdalfa, "Nákupy Šmajdalfa", "Fritol ft. Šmajdalf"),
             new Song(R.raw.nejsemtaknenazrany, "Nejsem tak nenažraný", "Fritol"),
@@ -37,9 +38,8 @@ public enum HlaskyList {
             new Song(R.raw.ostryzoubky, "Ostrý zoubky", "Fritol ft. Hobitofil"),
             new Song(R.raw.tahnehelium, "Táhne z tebe hélium", "Fritol"),
             new Song(R.raw.tupyjakrit, "Je tupý jak řiť", "Fritol ft. Bimbo")
-    };
-    public final Song[] hlaskyHobitofil = {
-            new Song(R.raw.ostryzoubky, "Ostrý zoubky", "Fritol ft. Hobitofil"),
+    );
+    public final List<Song> hlaskyHobitofil = Arrays.asList(new Song(R.raw.ostryzoubky, "Ostrý zoubky", "Fritol ft. Hobitofil"),
             new Song(R.raw.zubymammensi, "Zuby mám menší", "Hobitofil"),
             new Song(R.raw.vyhuloveobetihudobnihopr, "Jsou to vyhulové", "Hobitofil"),
             new Song(R.raw.prizraksjime, "Bude z neho přízrak", "Hobitofil"),
@@ -53,8 +53,8 @@ public enum HlaskyList {
             new Song(R.raw.kdybychtesjedli, "Kdybych te sjedli", "Hobitofil ft. Bobromil"),
             new Song(R.raw.sipyzhecu, "Šípy z hecu", "Bobromil ft. Hobitofil"),
             new Song(R.raw.udelalbychtosame, "Udělal bych to samé", "Hobitofil")
-    };
-    public final Song[] hlaskyRozne = {new Song(R.raw.jedenvladne, "Jeden ringoš velí všeckym", "úvod"),
+    );
+    public final List<Song> hlaskyRozne = Arrays.asList(new Song(R.raw.jedenvladne, "Jeden ringoš velí všeckym", "úvod"),
             new Song(R.raw.varovani, "Varovaní", "Ministerstvo zdravotnictvi"),
             new Song(R.raw.pajzlovebezvousu, "Pajzlové a ješte bez vousu", "Barman"),
             new Song(R.raw.jetiosmnact, "Je ti 18 smrade", "Barman"),
@@ -64,8 +64,8 @@ public enum HlaskyList {
             new Song(R.raw.vetrista, "Vetrista šou", "Vyhulové"),
             new Song(R.raw.chcemjenparitkravo, "Chcem jen pařit krávo", "Vyhulové"),
             new Song(R.raw.heliovebalonky, "Héliové balónky", "Smradupán")
-    };
-    public final Song[] hlaskySmajdalf = {new Song(R.raw.pisnickasmajdalfa, "Trápna písnička", "Šmajdalf"),
+    );
+    public final List<Song> hlaskySmajdalf = Arrays.asList(new Song(R.raw.pisnickasmajdalfa, "Trápna písnička", "Šmajdalf"),
             new Song(R.raw.magicseneflaka, "Magič se nikdy nefláka", "Šmajdalf"),
             new Song(R.raw.smiech, "Hehehuhu", "Fritol ft. Šmajdalf"),
             new Song(R.raw.nakupysmajdalfa, "Nákupy Šmajdalfa", "Fritol ft. Šmajdalf"),
@@ -82,8 +82,8 @@ public enum HlaskyList {
             new Song(R.raw.comnedrzi, "Co mne drží ve vzduchu", "Šmajdalf"),
             new Song(R.raw.radilisme, "Řádili sme", "Šmajdalf"),
             new Song(R.raw.toaletakveverky, "Toaleťák a veverky", "Šmajdalf")
-    };
-    public final Song[] hlaskySpolocesntvaTentonancu = {new Song(R.raw.urvetitoruce, "Urve ti to ruce", "Choboti"),
+    );
+    public final List<Song> hlaskySpolocesntvaTentonancu = Arrays.asList(new Song(R.raw.urvetitoruce, "Urve ti to ruce", "Choboti"),
             new Song(R.raw.nabenzinku, "Do Roklinky, na benzínku", "Hobitofil ft. Choboti"),
             new Song(R.raw.slusimito, "Sluší mi to?", "Legoland"),
             new Song(R.raw.umimvarit, "Ja umím vařit", "Slim"),
@@ -98,12 +98,12 @@ public enum HlaskyList {
             new Song(R.raw.geronimooo, "Geronimooo", "Pajzl"),
             new Song(R.raw.ukrastvousy, "Chtejí mi ukrást vousy", "Pajzl"),
             new Song(R.raw.podmediskutovat, "Podme vo tom diskutovat", "Legoland")
-    };
-    public final Song[] hlaskyVLothoriene = {new Song(R.raw.bohatymberu, "Bohatým beru, na chudé seru", "Babin Hud"),
+    );
+    public final List<Song> hlaskyVLothoriene = Arrays.asList(new Song(R.raw.bohatymberu, "Bohatým beru, na chudé seru", "Babin Hud"),
             new Song(R.raw.nehybapusou, "Kecám a nehýbam pusou", "Galadriel"),
             new Song(R.raw.smrdizebyja, "Neco tady smrdí, žeby ja?", "Celeborn")
-    };
-    public final Song[] hlaskyVRoklinke = {new Song(R.raw.vodpriskni, "Vodprískni", "Bimbo"),
+    );
+    public final List<Song> hlaskyVRoklinke = Arrays.asList(new Song(R.raw.vodpriskni, "Vodprískni", "Bimbo"),
             new Song(R.raw.starycmoud, "Starý čmoud", "Bimbo"),
             new Song(R.raw.oslava, "Oslava Bimbových narodenín", "Bimbo"),
             new Song(R.raw.bimboodchadza, "Odchod, co je Matrix", "Bimbo"),
@@ -121,24 +121,39 @@ public enum HlaskyList {
             new Song(R.raw.spolocenstvotentonancu, "Spoločenstvo tentonancu", "Elrond ft. Choboti"),
             new Song(R.raw.yoda, "Kostým z hviezdnych válek", "Bimbo"),
             new Song(R.raw.tupyjakrit, "Je tupý jak řiť", "Fritol ft. Bimbo")
-    };
+    );
 
     public ArrayList<Song> hlaskyVsetky = null;
+    public List<Song>[] hlaskyRefs = null;
+
+    public void makeHlaskyRefs(){
+        if (hlaskyRefs==null){
+            hlaskyRefs = new List[8];
+            hlaskyRefs[0] = hlaskySpolocesntvaTentonancu;
+            hlaskyRefs[1] = hlaskyBobromil;
+            hlaskyRefs[2] = hlaskyHobitofil;
+            hlaskyRefs[3] = hlaskyFritol;
+            hlaskyRefs[4] = hlaskySmajdalf;
+            hlaskyRefs[5] = hlaskyVRoklinke;
+            hlaskyRefs[6] = hlaskyVLothoriene;
+            hlaskyRefs[7] = hlaskyRozne;
+
+        }
+    }
 
     public void makeList(){
         if (hlaskyVsetky == null){
             hlaskyVsetky = new ArrayList<>();
-            hlaskyVsetky.addAll(Arrays.asList(hlaskyBobromil));
-            hlaskyVsetky.addAll(Arrays.asList(hlaskyFritol));
-            hlaskyVsetky.addAll(Arrays.asList(hlaskyHobitofil));
-            hlaskyVsetky.addAll(Arrays.asList(hlaskyRozne));
-            hlaskyVsetky.addAll(Arrays.asList(hlaskySmajdalf));
-            hlaskyVsetky.addAll(Arrays.asList(hlaskySpolocesntvaTentonancu));
-            hlaskyVsetky.addAll(Arrays.asList(hlaskyVLothoriene));
-            hlaskyVsetky.addAll(Arrays.asList(hlaskyVRoklinke));
+            hlaskyVsetky.addAll(hlaskyBobromil);
+            hlaskyVsetky.addAll(hlaskyHobitofil);
+            hlaskyVsetky.addAll(hlaskyFritol);
+            hlaskyVsetky.addAll(hlaskySmajdalf);
+            hlaskyVsetky.addAll(hlaskyRozne);
+            hlaskyVsetky.addAll(hlaskySpolocesntvaTentonancu);
+            hlaskyVsetky.addAll(hlaskyVRoklinke);
+            hlaskyVsetky.addAll(hlaskyVLothoriene);
         }
     }
-
 
 
 

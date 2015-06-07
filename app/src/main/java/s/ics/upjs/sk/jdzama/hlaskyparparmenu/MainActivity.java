@@ -1,7 +1,6 @@
 package s.ics.upjs.sk.jdzama.hlaskyparparmenu;
 
 import android.app.Activity;
-import android.app.NotificationManager;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
@@ -10,15 +9,12 @@ import android.content.IntentFilter;
 import android.content.ServiceConnection;
 import android.os.Bundle;
 import android.os.IBinder;
-import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.Button;
-import android.widget.ListView;
 import android.widget.MediaController.MediaPlayerControl;
 import android.widget.TextView;
 
@@ -27,7 +23,7 @@ import java.util.ArrayList;
 import s.ics.upjs.sk.jdzama.hlaskyparparmenu.MusicService.MusicBinder;
 
 
-public class MainActivity extends ActionBarActivity implements MediaPlayerControl {
+public class MainActivity extends Activity implements MediaPlayerControl {
 
     private MusicController controller;
     private MusicService musicService;
@@ -51,7 +47,10 @@ public class MainActivity extends ActionBarActivity implements MediaPlayerContro
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getActionBar().setDisplayShowHomeEnabled(false);
         setContentView(R.layout.activity_main);
+
+
 
         hlaskyBtn = (Button) findViewById(R.id.hlasky);
         controlerView = (View) findViewById(R.id.player_control);
@@ -90,10 +89,8 @@ public class MainActivity extends ActionBarActivity implements MediaPlayerContro
     private void restoreMusicState(Bundle savedInstanceState) {
 
         data = (SaveData) savedInstanceState.get(SAVED_STATE);
-        String je = "neje NULL";
-        if (data==null)
-            je = "je NULL";
-        Log.wtf("ACTIVITY: ","RESTORUJEM     "+je);
+
+        Log.wtf("ACTIVITY: ","RESTORUJEM ");
         //prepareService();
     }
 
@@ -169,7 +166,7 @@ public class MainActivity extends ActionBarActivity implements MediaPlayerContro
             try {
                 unbindService(musicConnection);
             }catch (IllegalArgumentException e){
-                Log.wtf("ACTIVITY : ","nestiha, zrusi sa");
+                Log.wtf("ACTIVITY : ","nestiha, zrusi sa (pokus o viacnasobne zrusenie)");
             }
         }
 

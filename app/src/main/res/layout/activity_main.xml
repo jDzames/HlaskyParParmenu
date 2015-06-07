@@ -14,8 +14,9 @@
         android:layout_height="wrap_content"
         android:id="@+id/hlasky"
         android:text="Hlášky"
+        android:textStyle="bold"
         android:onClick="startHlaskyActivity"
-        android:textColor="@android:color/secondary_text_light"
+        android:textColor="@android:color/white"
         android:textSize="20sp"
         />
 
@@ -24,7 +25,8 @@
         android:layout_height="wrap_content"
         android:id="@+id/infoFilm"
         android:text="Viac o Pár pařmenoch"
-        android:textColor="@android:color/secondary_text_light"
+        android:textStyle="bold"
+        android:textColor="@android:color/white"
         android:textSize="20sp"
         />
 
@@ -32,8 +34,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/infoAutor"
-        android:text="Info o autorovi"
-        android:textColor="@android:color/secondary_text_light"
+        android:text="O aplikácii"
+        android:textStyle="bold"
+        android:textColor="@android:color/white"
         android:textSize="20sp"
         />
 
