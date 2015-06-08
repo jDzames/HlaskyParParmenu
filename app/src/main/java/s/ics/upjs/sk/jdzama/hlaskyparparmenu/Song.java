@@ -7,11 +7,16 @@ package s.ics.upjs.sk.jdzama.hlaskyparparmenu;
  * Sue Smith - February 2014
  */
 
-public class Song {
+import java.util.Comparator;
+
+public class Song implements Comparator<Song>, Comparable<Song>{
 
     private int id;
     public String title;
     public String artist;
+
+    public Song() {
+    }
 
     public Song(int songID, String songTitle, String songArtist){
         id=songID;
@@ -26,6 +31,28 @@ public class Song {
     @Override
     public String toString() {
         return this.artist+" - "+this.title;
+    }
+
+    @Override
+    public int compareTo(Song song) {
+        return this.getID() - song.getID();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o==null){
+            return false;
+        }
+        if (!(o instanceof Song)){
+            return false;
+        }
+        Song song2 = (Song) o;
+        return this.getID()==song2.getID();
+    }
+
+    @Override
+    public int compare(Song song1, Song song2) {
+        return song1.getID() - song2.getID();
     }
 }
 

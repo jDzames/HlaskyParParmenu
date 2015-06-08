@@ -2,10 +2,13 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="s.ics.upjs.sk.jdzama.hlaskyparparmenu" >
 
+    <uses-sdk android:minSdkVersion="11" />
+
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
-    <uses-sdk android:minSdkVersion="11" />
+
+    <android:uses-permission android:name="android.permission.READ_PHONE_STATE" />
 
     <application
         android:allowBackup="true"
@@ -32,9 +35,23 @@
 
         <activity
             android:name=".HlaskyActivity"
-            android:label="@string/title_activity_hlasky">
+            android:label="@string/title_activity_hlasky" >
+        </activity>
+        <activity
+            android:name=".OblubeneActivity"
+            android:label="@string/title_activity_oblubene"
+            android:parentActivityName=".MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="s.ics.upjs.sk.jdzama.hlaskyparparmenu.MainActivity" />
         </activity>
 
+        <provider
+            android:name=".provider.OblubeneContentProvider"
+            android:authorities="s.ics.upjs.sk.jdzama.hlaskyparparmenu.provider.OblubeneContentProvider"
+            android:enabled="true"
+            android:exported="false" >
+        </provider>
     </application>
 
 </manifest>

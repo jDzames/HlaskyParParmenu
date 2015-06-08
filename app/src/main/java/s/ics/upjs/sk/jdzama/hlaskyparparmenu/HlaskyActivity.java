@@ -41,10 +41,10 @@ public class HlaskyActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_hlasky);
 
-        mNavItems.add(new NavItem("Spoločenstvo tentonancu", "Členovia+mix", R.drawable.parmeni));
+        mNavItems.add(new NavItem("Spoločenstvo tentonancu", "Členovia+mix", R.drawable.backgroundb));
         mNavItems.add(new NavItem("Bobromil", "Boromir", R.drawable.bobromil));
         mNavItems.add(new NavItem("Hobitofil", "Aragorn", R.drawable.parmenh));
-        mNavItems.add(new NavItem("Fritol", "Frodo", R.drawable.parmenh));
+        mNavItems.add(new NavItem("Fritol", "Frodo", R.drawable.fritol));
         mNavItems.add(new NavItem("Šmajdalf", "Gandalf", R.drawable.parmeng));
         mNavItems.add(new NavItem("V ro(k)linke", "", R.drawable.elmond));
         mNavItems.add(new NavItem("V Lothoriene", "", R.drawable.haldir));

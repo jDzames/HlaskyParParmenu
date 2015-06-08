@@ -9,5 +9,6 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="drawer_open">Otvor</string>
     <string name="drawer_close">Zavri</string>
+    <string name="title_activity_oblubene">Obľúbené</string>
 
 </resources>
