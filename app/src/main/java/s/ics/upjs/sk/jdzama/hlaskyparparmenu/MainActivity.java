@@ -41,7 +41,7 @@ public class MainActivity extends Activity implements MediaPlayerControl {
     private SaveData data;
     private TextView songInfo;
 
-    private final String adviceToPlay = new String("Pre náhodné prehrávanie stlačte play");
+    private final String adviceToPlay = new String("Náhodné prehrávanie ovládate vpravo hore");
 
 
     @Override
@@ -49,7 +49,7 @@ public class MainActivity extends Activity implements MediaPlayerControl {
         super.onCreate(savedInstanceState);
         getActionBar().setDisplayShowHomeEnabled(false);
         setContentView(R.layout.activity_main);
-        
+
 
 
         hlaskyBtn = (Button) findViewById(R.id.hlasky);
@@ -116,7 +116,7 @@ public class MainActivity extends Activity implements MediaPlayerControl {
             start();
             controller.show(0);
         }
-        Log.wtf("ACTIVITY: ","som po RESUME ");
+        Log.wtf("ACTIVITY: ", "som po RESUME ");
     }
 
     @Override
@@ -142,13 +142,13 @@ public class MainActivity extends Activity implements MediaPlayerControl {
     @Override
     protected void onStop() {
         stopPlaying();
-        Log.wtf("ACTIVITY: ","som v STOP ");
+        Log.wtf("ACTIVITY: ", "som v STOP ");
         super.onStop();
     }
 
     @Override
     protected void onDestroy() {
-        Log.wtf("ACTIVITY: ","som v DESTROY ");
+        Log.wtf("ACTIVITY: ", "som v DESTROY ");
         unregisterReceiver(myReceiver);
         super.onDestroy();
     }
@@ -210,10 +210,8 @@ public class MainActivity extends Activity implements MediaPlayerControl {
 
     public void startPlaying(){
         if (data==null){
-            Log.wtf("ACTIVITY: ","player s data NULL");
             musicService.playSong();
         }else {
-            Log.wtf("ACTIVITY: ","player s data: "+data.getSongId()+", "+data.getPosition());
             musicService.playSongAtPos(data.getSongId(), data.getPosition());
             data = null;
         }
@@ -222,7 +220,6 @@ public class MainActivity extends Activity implements MediaPlayerControl {
             playbackPaused=false;
         }
         controller.show(0);
-        setTrackInfo();
     }
 
     public void setTrackInfo(){
@@ -291,6 +288,13 @@ public class MainActivity extends Activity implements MediaPlayerControl {
         hlaskyActivityIntent.putExtra("key", "pustene"); //Optional parameters
         MainActivity.this.startActivity(hlaskyActivityIntent);
     }
+
+    public void startOblubeneActivity(View view){
+        Intent oblubeneActivityIntent = new Intent(MainActivity.this, OblubeneActivity.class);
+        oblubeneActivityIntent.putExtra("key", "pustene"); //Optional parameters
+        MainActivity.this.startActivity(oblubeneActivityIntent);
+    }
+
 
     //////////////////////////////MUSIC PLAYER//////////////////////////////
 

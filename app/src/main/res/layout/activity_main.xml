@@ -23,18 +23,19 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/infoFilm"
-        android:text="Viac o Pár pařmenoch"
+        android:id="@+id/oblubene"
+        android:text="Obľúbené hlášky"
         android:textStyle="bold"
         android:textColor="@android:color/white"
+        android:onClick="startOblubeneActivity"
         android:textSize="20sp"
         />
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/infoAutor"
-        android:text="O aplikácii"
+        android:id="@+id/info"
+        android:text="Viac o ..."
         android:textStyle="bold"
         android:textColor="@android:color/white"
         android:textSize="20sp"
@@ -45,7 +46,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:textSize="25sp"
+        android:textSize="24sp"
         android:textColor="@android:color/background_light"
         android:layout_alignParentBottom="true"/>
 

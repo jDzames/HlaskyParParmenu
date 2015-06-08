@@ -1,0 +1,13 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="s.ics.upjs.sk.jdzama.hlaskyparparmenu.OblubeneFragment"
+    android:background="@color/accent_material_dark">
+
+    <ListView
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:id="@+id/listOblubene"
+        />
+
+</FrameLayout>

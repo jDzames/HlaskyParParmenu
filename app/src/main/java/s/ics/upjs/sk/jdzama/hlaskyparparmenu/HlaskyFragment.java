@@ -56,6 +56,7 @@ public class HlaskyFragment extends Fragment implements AdapterView.OnItemClickL
                              Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.fragment_hlasky, container, false);
         //this.setRetainInstance(true);
+        setHasOptionsMenu(true);
 
         player = new MediaPlayer();
 
@@ -72,7 +73,6 @@ public class HlaskyFragment extends Fragment implements AdapterView.OnItemClickL
 
 
     private void setHlaskyIntoList() {
-        Log.wtf("FRAGMENT HLASKY: ","cislo je "+positionInList);
 
         if (HlaskyList.INSTANCE.hlaskyRefs==null){
             HlaskyList.INSTANCE.makeHlaskyRefs();

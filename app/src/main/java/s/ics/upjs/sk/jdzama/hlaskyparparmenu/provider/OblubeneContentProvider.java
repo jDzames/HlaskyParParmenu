@@ -2,6 +2,7 @@ package s.ics.upjs.sk.jdzama.hlaskyparparmenu.provider;
 
 import android.content.ContentProvider;
 import android.content.ContentValues;
+import android.content.UriMatcher;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
@@ -22,6 +23,10 @@ public class OblubeneContentProvider extends ContentProvider {
             .build();
 
     private DatabaseOpenHelper databaseHelper;
+
+    private UriMatcher uriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
+    private static final int URI_MATCH_NOTES = 0;
+    private static final int URI_MATCH_NOTE_BY_ID = 1;
 
     public OblubeneContentProvider() {
     }

@@ -97,7 +97,6 @@ public class HlaskyActivity extends Activity {
 
         restoreInstanceState(savedInstanceState);
 
-
         fragmentManager = getFragmentManager();
 
         fragment = fragmentManager.findFragmentByTag(HLASKY_FRAGMENT);

@@ -1,17 +1,29 @@
 package s.ics.upjs.sk.jdzama.hlaskyparparmenu;
 
-import android.support.v7.app.ActionBarActivity;
+import android.app.Activity;
+import android.app.Fragment;
+import android.app.FragmentManager;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
 
-public class OblubeneActivity extends ActionBarActivity {
+public class OblubeneActivity extends Activity {
+
+    private FragmentManager fragmentManager;
+    private Fragment oblubeneFragment;
+    private static final String OBLUBENE_FRAGMENT = "oblubeneFr";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_oblubene);
+
+        fragmentManager = getFragmentManager();
+        oblubeneFragment = new OblubeneFragment();
+        fragmentManager.beginTransaction()
+                .replace(R.id.mainContent, oblubeneFragment, OBLUBENE_FRAGMENT)
+                .commit();
     }
 
     @Override
@@ -25,10 +37,6 @@ public class OblubeneActivity extends ActionBarActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
 
         return super.onOptionsItemSelected(item);
     }
