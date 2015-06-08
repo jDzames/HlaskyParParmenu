@@ -14,6 +14,7 @@ public class Song implements Comparator<Song>, Comparable<Song>{
     private int id;
     public String title;
     public String artist;
+    public boolean jeOblubena;
 
     public Song() {
     }
@@ -22,6 +23,7 @@ public class Song implements Comparator<Song>, Comparable<Song>{
         id=songID;
         title=songTitle;
         artist=songArtist;
+        jeOblubena = false;
     }
 
     public int getID(){return id;}
@@ -36,6 +38,14 @@ public class Song implements Comparator<Song>, Comparable<Song>{
     @Override
     public int compareTo(Song song) {
         return this.getID() - song.getID();
+    }
+
+    public void setJeOblubena(boolean jeOblubena) {
+        this.jeOblubena = jeOblubena;
+    }
+
+    public boolean isJeOblubena() {
+        return jeOblubena;
     }
 
     @Override

@@ -2,7 +2,7 @@ package s.ics.upjs.sk.jdzama.hlaskyparparmenu.provider;
 
 import android.provider.BaseColumns;
 
-//samozrejme z ics.upjs.sk/~novotnyr/android/5-stretnutie-zlte-poznamkove-papieriky.html
+//samozrejme podla ics.upjs.sk/~novotnyr/android/5-stretnutie-zlte-poznamkove-papieriky.html
 
 public interface Provider {
     public interface Oblubene extends BaseColumns {

@@ -1,6 +1,6 @@
 package s.ics.upjs.sk.jdzama.hlaskyparparmenu.database;
 
-//podla ics.upjs.sk/~novotnyr/android/5-stretnutie-zlte-poznamkove-papieriky.html
+//db podla ics.upjs.sk/~novotnyr/android/5-stretnutie-zlte-poznamkove-papieriky.html
 
 import android.content.ContentValues;
 import android.content.Context;
