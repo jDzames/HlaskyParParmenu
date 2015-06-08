@@ -28,6 +28,7 @@ import java.util.ArrayList;
 public class HlaskyActivity extends Activity {
 
     private static String TAG = HlaskyActivity.class.getSimpleName();
+    private static final String HLASKY_FRAGMENT = "hlasky_fragment";
 
     ListView mDrawerList;
     RelativeLayout mDrawerPane;
@@ -35,13 +36,15 @@ public class HlaskyActivity extends Activity {
     public DrawerLayout mDrawerLayout;
     private int positionFragment=0;
     ArrayList<NavItem> mNavItems = new ArrayList<NavItem>();
+    private Fragment fragment;
+    private FragmentManager fragmentManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_hlasky);
 
-        mNavItems.add(new NavItem("Spoločenstvo tentonancu", "Členovia+mix", R.drawable.backgroundb));
+        mNavItems.add(new NavItem("Spoločenstvo tentonancu", "Členovia+mix", R.drawable.parmeni));
         mNavItems.add(new NavItem("Bobromil", "Boromir", R.drawable.bobromil));
         mNavItems.add(new NavItem("Hobitofil", "Aragorn", R.drawable.parmenh));
         mNavItems.add(new NavItem("Fritol", "Frodo", R.drawable.fritol));
@@ -94,23 +97,26 @@ public class HlaskyActivity extends Activity {
 
         restoreInstanceState(savedInstanceState);
 
-        selectItemFromDrawer(positionFragment);
 
+        fragmentManager = getFragmentManager();
+
+        fragment = fragmentManager.findFragmentByTag(HLASKY_FRAGMENT);
+        if (fragment==null) {
+            selectItemFromDrawer(positionFragment);
+        }else{
+            setTitle(mNavItems.get(positionFragment).mTitle);
+        }
     }
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
-        Log.wtf("STATE  ","saveujem  "+positionFragment);
         outState.putInt("POSITION", positionFragment);
         super.onSaveInstanceState(outState);
     }
 
     protected void restoreInstanceState(Bundle savedInstanceState) {
-        Log.wtf("STATE  ","pred ifom");
         if (savedInstanceState!=null){
-
             positionFragment = (int) savedInstanceState.get("POSITION");
-            Log.wtf("STATE  ","v ife  "+positionFragment);
         }
     }
 
@@ -119,11 +125,11 @@ public class HlaskyActivity extends Activity {
             * is selected.
             * */
     private void selectItemFromDrawer(int position) {
-        Fragment fragment = HlaskyFragment.newInstance(position);
 
-        FragmentManager fragmentManager = getFragmentManager();
+        fragment = HlaskyFragment.newInstance(position);
+
         fragmentManager.beginTransaction()
-                .replace(R.id.mainContent, fragment)
+                .replace(R.id.mainContent, fragment, HLASKY_FRAGMENT)
                 .commit();
 
         mDrawerList.setItemChecked(position, true);
@@ -165,7 +171,7 @@ public class HlaskyActivity extends Activity {
         if (mDrawerToggle.onOptionsItemSelected(item)){
             //klikol som na burger
             Log.wtf("HlaskyActivity: ","klik na burger");
-            return true;
+            return false;
         }
 
         return false;

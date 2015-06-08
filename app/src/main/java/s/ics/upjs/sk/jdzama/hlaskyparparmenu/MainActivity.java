@@ -49,7 +49,7 @@ public class MainActivity extends Activity implements MediaPlayerControl {
         super.onCreate(savedInstanceState);
         getActionBar().setDisplayShowHomeEnabled(false);
         setContentView(R.layout.activity_main);
-
+        
 
 
         hlaskyBtn = (Button) findViewById(R.id.hlasky);

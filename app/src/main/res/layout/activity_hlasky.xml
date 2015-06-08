@@ -18,7 +18,7 @@
         android:id="@+id/drawerPane"
         android:layout_gravity="start">
 
-        <!-- Profile Box -->
+        <!-- Back Box -->
 
         <RelativeLayout
             android:id="@+id/profileBox"
@@ -32,7 +32,7 @@
                 android:id="@+id/avatar"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:src="@drawable/parmeni"
+                android:src="@drawable/backgroundb"
                 android:layout_marginTop="15dp" />
 
             <LinearLayout
@@ -64,7 +64,7 @@
             </LinearLayout>
         </RelativeLayout>
 
-        <!-- List of Actions (pages) -->
+        <!-- List of Actions (items) -->
         <ListView
             android:id="@+id/navList"
             android:layout_width="280dp"

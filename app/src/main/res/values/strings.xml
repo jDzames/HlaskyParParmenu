@@ -4,11 +4,9 @@
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_hlasky">Hlášky</string>
+    <string name="title_activity_oblubene">Obľúbené</string>
 
-<!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="drawer_open">Otvor</string>
     <string name="drawer_close">Zavri</string>
-    <string name="title_activity_oblubene">Obľúbené</string>
 
 </resources>

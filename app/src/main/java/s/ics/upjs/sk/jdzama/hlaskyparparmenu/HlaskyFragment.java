@@ -27,6 +27,7 @@ import java.util.List;
 public class HlaskyFragment extends Fragment implements AdapterView.OnItemClickListener {
 
     public static final String ARG_INDEX = "INDEX";
+    private static final String SAVED_STATE = "save_data";
     private int positionInList;
     private ListView hlaskyListView;
     private View rootView;
@@ -34,6 +35,7 @@ public class HlaskyFragment extends Fragment implements AdapterView.OnItemClickL
     private MediaPlayer player;
     private int songChosen;
     private boolean configChanged=false;
+    private SaveData data;
 
     public HlaskyFragment() {
         // Required empty public constructor
@@ -53,6 +55,7 @@ public class HlaskyFragment extends Fragment implements AdapterView.OnItemClickL
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.fragment_hlasky, container, false);
+        //this.setRetainInstance(true);
 
         player = new MediaPlayer();
 
@@ -61,9 +64,12 @@ public class HlaskyFragment extends Fragment implements AdapterView.OnItemClickL
             positionInList = getArguments().getInt(ARG_INDEX);
         }
         setHlaskyIntoList();
-        // Inflate the layout for this fragment
+
+        restoreMusicState(savedInstanceState);
+
         return rootView;
     }
+
 
     private void setHlaskyIntoList() {
         Log.wtf("FRAGMENT HLASKY: ","cislo je "+positionInList);
@@ -98,39 +104,60 @@ public class HlaskyFragment extends Fragment implements AdapterView.OnItemClickL
 
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+        playSong(i);
+    }
+
+    private void playSong(int id){
         if (player==null){
             player = new MediaPlayer();
         }
         player.reset();
-        songChosen = myHlaskyList.get(i).getID();
+        songChosen = myHlaskyList.get(id).getID();
         player = MediaPlayer.create(getActivity(), songChosen);
-        player.setWakeMode(getActivity(), PowerManager.PARTIAL_WAKE_LOCK);
         player.start();
     }
 
     @Override
     public void onStart() {
         super.onStart();
-        configChanged = false;
+
+    }
+
+    private void restoreMusicState(Bundle savedInstanceState) {
+        if(savedInstanceState != null) {
+            data = (SaveData) savedInstanceState.get(SAVED_STATE);
+            if (data != null) {
+                if (player==null){
+                    player = new MediaPlayer();
+                }
+                player.reset();
+                songChosen = data.getSongId();
+                player = MediaPlayer.create(getActivity(), songChosen);
+                player.start();
+                player.seekTo(data.getPosition());
+            }
+        }
     }
 
     @Override
-    public void onStop() {
-        if (configChanged && player!=null){
+    public void onSaveInstanceState(Bundle outState) {
+        if (player.isPlaying()){
+            data = new SaveData(songChosen, player.getCurrentPosition());
+            outState.putSerializable(SAVED_STATE, data);
+        }
+        super.onSaveInstanceState(outState);
+    }
+
+    @Override
+    public void onDestroy() {
+
+        Log.wtf("FRAGMENT ","ON DESTROY");
+        if (player!=null) {
             player.stop();
             player.release();
             player = null;
-            Log.wtf("HLASKY FRAGM  ", "on stop a nulujem");
         }
-
-        super.onStop();
-    }
-
-    @Override
-    public void onConfigurationChanged(Configuration newConfig) {
-        configChanged = true;
-
-        super.onConfigurationChanged(newConfig);
+        super.onDestroy();
     }
 
     @Override
@@ -149,6 +176,7 @@ public class HlaskyFragment extends Fragment implements AdapterView.OnItemClickL
         Log.wtf("FRAGMENT ITEM","som pred ifom");
         if (id == R.id.action_stop){
             if (player!=null){
+                Log.wtf("FRAGMENT ITEM","player NEJE NULL");
                 player.reset();
             }
             return true;
