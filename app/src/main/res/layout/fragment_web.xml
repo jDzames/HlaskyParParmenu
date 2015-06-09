@@ -7,7 +7,7 @@
     <TableRow>
         <Button
             android:id="@+id/banda"
-            android:text="Banda Trotlu"
+            android:text="@string/banda_trotlu"
             android:textSize="18sp"
             android:layout_width="0dp"
             android:layout_weight="1"
@@ -16,7 +16,7 @@
             android:padding="7dip"/>
         <Button
             android:id="@+id/wiki"
-            android:text="Wikipedia"
+            android:text="@string/wikipedia"
             android:textSize="18sp"
             android:layout_width="0dp"
             android:layout_weight="1"
@@ -28,7 +28,7 @@
     <TableRow>
         <Button
             android:id="@+id/fb"
-            android:text="Facebook"
+            android:text="@string/facebook"
             android:textSize="18sp"
             android:layout_width="0dp"
             android:layout_weight="1"
@@ -37,7 +37,7 @@
             android:padding="7dip"/>
         <Button
             android:id="@+id/necyklopedia"
-            android:text="Necyklopedia"
+            android:text="@string/necyklopedia"
             android:textSize="18sp"
             android:layout_width="0dp"
             android:layout_weight="1"

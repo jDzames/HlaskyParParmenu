@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory android:title="@string/prehravanie_kategoria">
+    <CheckBoxPreference android:key="random"
+        android:title="@string/nahodne_prehravanie"
+        android:defaultValue="true"/>
+
+    <CheckBoxPreference android:key="loop"
+        android:title="@string/loop"
+        android:defaultValue="true"/>
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="@string/database">
+        <Preference android:title="@string/delete"
+            android:key="deleteOblubeneDatabase"
+            android:summary="@string/delete_summary"/>
+    </PreferenceCategory>
+
+</PreferenceScreen>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Hlášky Pár Pařmenů</string>
+
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_hlasky">Hlášky</string>
+    <string name="title_activity_oblubene">Oblíbené</string>
+
+    <string name="drawer_open">Otevři</string>
+    <string name="drawer_close">Zavři</string>
+
+    <string name="title_activity_info">Různe info</string>
+    <string name="autor_info">Tato aplikace vznikla po jednom semestru práce s androidem jako závěrečný projekt. Autorem jsem já - vysokoškolský student, slovák. :) \nPravdepodobne ještě vyjde jedna verze se zjednodušeným ovládáním. \ n \nAplikace je zdarma, tak se bavte (jako i já). :)</string>
+    <string name="home">Domů</string>
+    <string name="back_home">Zpět do hlavního menu</string>
+    <string name="hlasky_button">Hlášky</string>
+    <string name="oblubene_hlasky_button">Oblíbené hlášky</string>
+    <string name="viac_button">Více ...</string>
+    <string name="line_two">Line 2</string>
+    <string name="line_one">Line 1</string>
+    <string name="banda_trotlu">Banda Trotlu</string>
+    <string name="wikipedia">Wikipedie</string>
+    <string name="facebook">Facebook</string>
+    <string name="necyklopedia">Necyklopedie</string>
+    <string name="hint">Náhodné přehrávání ovládáte vpravo nahoře</string>
+    <string name="settings">Nastavení</string>
+
+    <string name="nahodne_prehravanie">Náhodné přehrávání</string>
+    <string name="title_activity_preferences">Nastavení</string>
+    <string name="loop">Přehrávat všechny</string>
+    <string name="prehravanie_kategoria">Přehrávání hlášek v úvodním okně</string>
+    <string name="database">Databáze v okně s oblíbenými</string>
+    <string name="delete">Vymazat všechny oblíbené</string>
+    <string name="delete_summary">Vymazání oblíbených z okna s oblíbenými</string>
+    <string name="hlaska_pridana">Hláška přidána k oblíbeným</string>
+    <string name="to_add_oblubene">Přejít na přidávání</string>
+    <string name="ukazat_oblubene">Ukázat oblíbené</string>
+    <string name="hlaska_odstranena">Hláška byla odstraněna z oblíbených</string>
+    <string name="title_zmazanie">Smazání hlášky</string>
+    <string name="ano">Ano</string>
+    <string name="zrusit">Zrušit</string>
+    <string name="zmazat">Smazat</string>
+    <string name="delete_question">Odstranit z oblíbených hlášku: </string>
+    <string name="zobrazit_pridavanie_title">Zobrazit přidávání k oblíbeným</string>
+    <string name="prejst_na_pridavanie_hint">Přejít na přidávání k oblíbeným? (V okně, ve kterém se právě nacházíte můžete odstranit hlášku z oblíbených delším podržením, v druhém okně můžete klikáním přidat hlášky k oblíbeným.)</string>
+    <string name="zobrazit_oblubene_hint">Opravdu zobrazit oblíbené? (V okně, ve kterém se právě nacházíte můžete klikáním přidat hlášky k oblíbeným, v druhém okně můžete odstranit hlášku z oblíbených delším podržením.)</string>
+
+</resources>

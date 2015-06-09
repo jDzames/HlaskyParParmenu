@@ -60,8 +60,8 @@ public enum HlaskyList {
             new Song(R.raw.jetiosmnact, "Je ti 18 smrade", "Barman"),
             new Song(R.raw.celnikhobitofil, "Je to celnik, Hobiofil", "Barman"),
             new Song(R.raw.paneeee, "Paneee...?", "Barman"),
-            new Song(R.raw.vyhulovedontwory, "Dont worry", "Vyhulové"),
-            new Song(R.raw.vetrista, "Vetrista šou", "Vyhulové"),
+            //new Song(R.raw.vyhulovedontwory, "Dont worry", "Vyhulové"),
+            //new Song(R.raw.vetrista, "Vetrista šou", "Vyhulové"),
             new Song(R.raw.chcemjenparitkravo, "Chcem jen pařit krávo", "Vyhulové"),
             new Song(R.raw.heliovebalonky, "Héliové balónky", "Smradupán")
     );
@@ -73,7 +73,7 @@ public enum HlaskyList {
             new Song(R.raw.nesezerto, "Nesežer to", "Šmajdalf"),
             new Song(R.raw.zdrhamnesezerto, "Zdrhám, nsežer to", "Šmajdalf"),
             new Song(R.raw.nesezralsho, "Nesežrals ho?(s BafikiBaf a se Slimem)", "Šmajdalf"),
-            new Song(R.raw.smajdalfkouri, "Šmajdalf kouři", "Šmajdalf"),
+            //new Song(R.raw.smajdalfkouri, "Šmajdalf kouři", "Šmajdalf"),
             new Song(R.raw.skushelium, "Mnel bys skusit hélium", "Šmajdalf ft. Smradupán"),
             new Song(R.raw.smoulalala, "Šmoulalala", "Šmajdalf ft. Smradupán"),
             new Song(R.raw.svetlusky, "Svetlušky", "Šmajdalf"),
@@ -105,7 +105,7 @@ public enum HlaskyList {
     );
     public final List<Song> hlaskyVRoklinke = Arrays.asList(new Song(R.raw.vodpriskni, "Vodprískni", "Bimbo"),
             new Song(R.raw.starycmoud, "Starý čmoud", "Bimbo"),
-            new Song(R.raw.oslava, "Oslava Bimbových narodenín", "Bimbo"),
+            //new Song(R.raw.oslava, "Oslava Bimbových narodenín", "Bimbo"),
             new Song(R.raw.bimboodchadza, "Odchod, co je Matrix", "Bimbo"),
             new Song(R.raw.bbbbb, "Bbbbb", "Bbbbb"),
             new Song(R.raw.copakcelnik, "Copak copak, celnik bude grilovat", "Bbbb"),

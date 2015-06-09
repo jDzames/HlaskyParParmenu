@@ -2,11 +2,8 @@ package s.ics.upjs.sk.jdzama.hlaskyparparmenu;
 
 
 import android.app.Fragment;
-import android.content.res.Configuration;
 import android.media.MediaPlayer;
 import android.os.Bundle;
-import android.os.PowerManager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -150,8 +147,6 @@ public class HlaskyFragment extends Fragment implements AdapterView.OnItemClickL
 
     @Override
     public void onDestroy() {
-
-        Log.wtf("FRAGMENT ","ON DESTROY");
         if (player!=null) {
             player.stop();
             player.release();
@@ -173,16 +168,12 @@ public class HlaskyFragment extends Fragment implements AdapterView.OnItemClickL
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-        Log.wtf("FRAGMENT ITEM","som pred ifom");
         if (id == R.id.action_stop){
             if (player!=null){
-                Log.wtf("FRAGMENT ITEM","player NEJE NULL");
                 player.reset();
             }
             return true;
         }
-
-        Log.wtf("FRAGMENT ITEM","som za ifom");
         return super.onOptionsItemSelected(item);
     }
 }

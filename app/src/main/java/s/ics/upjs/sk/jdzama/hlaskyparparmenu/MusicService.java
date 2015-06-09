@@ -8,13 +8,14 @@ import android.app.PendingIntent;
 import android.app.Service;
 import android.content.ContentUris;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Binder;
 import android.os.IBinder;
 import android.os.PowerManager;
-import android.util.Log;
+import android.preference.PreferenceManager;
 import android.view.View;
 
 /*
@@ -43,6 +44,7 @@ public class MusicService extends Service implements
     public static final int NOTIFY_ID=1;
     //shuffle flag and random
     private boolean shuffle=true;
+    private boolean loop=true;
     private Random rand;
 
     public void onCreate(){
@@ -51,7 +53,7 @@ public class MusicService extends Service implements
         //random
         rand=new Random();
         //initialize position
-        songPosn=rand.nextInt(102);
+        songPosn=rand.nextInt(80);
 
         //create player
         player = new MediaPlayer();
@@ -68,6 +70,9 @@ public class MusicService extends Service implements
         player.setOnErrorListener(this);
         //player.setOnPreparedListener(this);
         //playSong();
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        shuffle = preferences.getBoolean("random", true);
+        loop = preferences.getBoolean("loop", true);
     }
 
     //pass song list
@@ -101,7 +106,6 @@ public class MusicService extends Service implements
             player = MediaPlayer.create(this, (int)currSong);
         }
         catch(Exception e){
-            Log.e("MUSIC SERVICE", "Error setting data source", e);
         }
         player.start();
         player.seekTo(position);
@@ -158,7 +162,6 @@ public class MusicService extends Service implements
             player = MediaPlayer.create(this, (int)currSong);
         }
         catch(Exception e){
-            Log.e("MUSIC SERVICE", "Error setting data source", e);
         }
         player.start();
         //notification();
@@ -172,11 +175,12 @@ public class MusicService extends Service implements
 
     @Override
     public void onCompletion(MediaPlayer mp) {
-        Log.wtf("MUSIC SERVICE", "COMPLETED");
         //check if playback has reached the end of a track
-        mp.reset();
-        playNext();
-        broadcastIntent(null);
+        if (loop) {
+            mp.reset();
+            playNext();
+            broadcastIntent(null);
+        }
     }
 
     public void broadcastIntent(View view)
@@ -188,7 +192,6 @@ public class MusicService extends Service implements
 
     @Override
     public boolean onError(MediaPlayer mp, int what, int extra) {
-        Log.v("MUSIC PLAYER", "Playback Error");
         mp.reset();
         return false;
     }
@@ -221,7 +224,6 @@ public class MusicService extends Service implements
     }
 
     public String getSongTitle(){
-        Log.wtf("SERVICE TITLE           ", "je " + songTitle.toString()+" cislo je  "+songs.size());
         if (songTitle==null){
             songTitle="";
         }
@@ -229,7 +231,6 @@ public class MusicService extends Service implements
     }
 
     public String getSongAuthor(){
-        Log.wtf("SERVICE AUTHOR           ","je "+songAuthor.toString());
         if (songAuthor==null){
             songAuthor="";
         }
@@ -259,7 +260,6 @@ public class MusicService extends Service implements
 
     public void seek(int posn){
         player.seekTo(posn);
-        Log.wtf("POSITION: ", "" + player.getCurrentPosition());
     }
 
     public void go(){
@@ -269,22 +269,49 @@ public class MusicService extends Service implements
     //skip to previous track
     public void playPrev(){
         int newSong = songPosn;
-        while(newSong==songPosn){
-            newSong=rand.nextInt(songs.size());
+        if (shuffle){
+            while(newSong==songPosn){
+                newSong=rand.nextInt(songs.size());
+            }
+        }else{
+            if (songs==null){
+                if(HlaskyList.INSTANCE.hlaskyVsetky==null){
+                    HlaskyList.INSTANCE.makeList();
+                }
+                songs = HlaskyList.INSTANCE.hlaskyVsetky;
+            }
+            if (songPosn==0){
+                newSong = songs.size()-1;
+            }else {
+                newSong = songPosn-1;
+            }
         }
         songPosn=newSong;
-
         playSong();
     }
 
     //skip to next
     public void playNext(){
         int newSong = songPosn;
-        while(newSong==songPosn){
-            newSong=rand.nextInt(songs.size());
+        if (shuffle){
+            while(newSong==songPosn){
+                newSong=rand.nextInt(songs.size());
+            }
+        }else {
+            if (songs==null){
+                if(HlaskyList.INSTANCE.hlaskyVsetky==null){
+                    HlaskyList.INSTANCE.makeList();
+                }
+                songs = HlaskyList.INSTANCE.hlaskyVsetky;
+            }
+            if (songPosn==songs.size()-1){
+                newSong = 0;
+            }else{
+                newSong = songPosn+1;
+            }
+
         }
         songPosn=newSong;
-
         playSong();
     }
 

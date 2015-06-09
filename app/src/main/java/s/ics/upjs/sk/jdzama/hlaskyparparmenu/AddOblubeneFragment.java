@@ -93,11 +93,12 @@ public class AddOblubeneFragment extends Fragment implements AdapterView.OnItemC
         values.put(Provider.Oblubene.RAW_ID, song.getID());
         values.put(Provider.Oblubene.NAZOV, song.getTitle());
         values.put(Provider.Oblubene.AUTOR, song.getArtist());
+        final String message = getResources().getString(R.string.hlaska_pridana);
 
         AsyncQueryHandler insertHandler = new AsyncQueryHandler(rootView.getContext().getContentResolver()) {
             @Override
             protected void onInsertComplete(int token, Object cookie, Uri uri) {
-                Toast.makeText(rootView.getContext(), "Hláška pridaná k obľúbeným", Toast.LENGTH_SHORT)
+                Toast.makeText(rootView.getContext(), message, Toast.LENGTH_SHORT)
                         .show();
             }
         };

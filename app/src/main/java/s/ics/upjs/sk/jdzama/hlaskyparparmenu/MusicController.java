@@ -24,7 +24,6 @@ public class MusicController extends MediaController {
     public void hide() {
         /*super.hide();*/
         if (SingletonData.INSTANCE.hide){
-            Log.wtf("CONTROLLER: ", "som v HIDE ");
             SingletonData.INSTANCE.hide = false;
             super.hide();
         }
@@ -34,7 +33,6 @@ public class MusicController extends MediaController {
     {
         if (event.getKeyCode() == KeyEvent.KEYCODE_BACK) {
             super.hide();
-            Log.wtf("CONTROLLER: ", "som v SPAT ");
             ((Activity) getContext()).finish();
         }
         return super.dispatchKeyEvent(event);
@@ -44,7 +42,6 @@ public class MusicController extends MediaController {
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
         super.hide();
-        Log.wtf("CONTROLLER: ", "som v ROTATE ");
         // ((Activity) getContext()).finish();
     }
 }

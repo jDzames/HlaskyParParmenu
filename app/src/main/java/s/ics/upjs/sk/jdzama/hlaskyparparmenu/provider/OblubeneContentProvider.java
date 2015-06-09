@@ -26,6 +26,7 @@ public class OblubeneContentProvider extends ContentProvider {
             .appendPath(Oblubene.TABLE_NAME)
             .build();
 
+
     private static final String MIME_TYPE_OBLUBENE = ContentResolver.CURSOR_DIR_BASE_TYPE + "/vnd." + AUTHORITY + "." + Oblubene.TABLE_NAME;
     private static final String MIME_TYPE_SINGLE_OBLUBENA = ContentResolver.CURSOR_ITEM_BASE_TYPE + "/vnd." + AUTHORITY + "." + Oblubene.TABLE_NAME;
 
@@ -119,6 +120,11 @@ public class OblubeneContentProvider extends ContentProvider {
                         .delete(Oblubene.TABLE_NAME, Oblubene._ID + " = " + id, Defaults.NO_SELECTION_ARGS);
                 getContext().getContentResolver().notifyChange(CONTENT_URI, Defaults.NO_CONTENT_OBSERVER);
                 return affectedRows;
+            case URI_MATCH_OBLUBENE:
+                int allAffectedRows = databaseHelper.getWritableDatabase()
+                        .delete(Oblubene.TABLE_NAME, Defaults.ALL_ROWS, Defaults.NO_SELECTION_ARGS);
+                getContext().getContentResolver().notifyChange(CONTENT_URI, Defaults.NO_CONTENT_OBSERVER);
+                return allAffectedRows;
             default:
                 return 0;
         }

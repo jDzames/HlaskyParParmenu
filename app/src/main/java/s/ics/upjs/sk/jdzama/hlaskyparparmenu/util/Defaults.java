@@ -112,4 +112,6 @@ public interface Defaults {
      * it just dismissed a dialog.
      */
     public static final DialogInterface.OnClickListener DISMISS_ACTION = null;
+
+    public static final String ALL_ROWS = null;
 }

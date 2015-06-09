@@ -9,6 +9,7 @@ import android.content.IntentFilter;
 import android.content.ServiceConnection;
 import android.os.Bundle;
 import android.os.IBinder;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
@@ -40,17 +41,22 @@ public class MainActivity extends Activity implements MediaPlayerControl {
     private SaveData data;
     private TextView songInfo;
 
-    private final String adviceToPlay = new String("Náhodné prehrávanie ovládate vpravo hore");
+    private String adviceToPlay="";
 
+    public static final boolean DO_NOT_READ_AGAIN = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        PreferenceManager.setDefaultValues(this, R.xml.settings, DO_NOT_READ_AGAIN);
+
         getActionBar().setDisplayShowHomeEnabled(false);
         setContentView(R.layout.activity_main);
 
         controlerView = findViewById(R.id.player_control);
         songInfo = (TextView) findViewById(R.id.songInfo);
+        adviceToPlay = getResources().getString(R.string.hint);
         setTextView();
 
         IntentFilter intentFilter = new IntentFilter("s.ics.upjs.sk.jdzama.hlaskyparparmenu.TRACK_INFO_INTENT");
@@ -152,7 +158,7 @@ public class MainActivity extends Activity implements MediaPlayerControl {
             try {
                 unbindService(musicConnection);
             }catch (IllegalArgumentException e){
-                Log.wtf("ACTIVITY : ","nestiha, zrusi sa (pokus o viacnasobne zrusenie)");
+                //Log.wtf("ACTIVITY : ","nestiha, zrusi sa (pokus o viacnasobne zrusenie)");
             }
         }
 
@@ -204,6 +210,7 @@ public class MainActivity extends Activity implements MediaPlayerControl {
             playbackPaused=false;
         }
         controller.show(0);
+        setTrackInfo();
     }
 
     public void setTrackInfo(){
@@ -253,7 +260,10 @@ public class MainActivity extends Activity implements MediaPlayerControl {
         }
         if (id == R.id.action_play) {
             prepareService();
-            // startPlaying(); zavolane po pripojeni
+            return true;
+        }
+        if (id == R.id.action_preferences) {
+            startPreferences();
             return true;
         }
 
@@ -268,22 +278,23 @@ public class MainActivity extends Activity implements MediaPlayerControl {
 
     public void startHlaskyActivity(View view){
         Intent hlaskyActivityIntent = new Intent(MainActivity.this, HlaskyActivity.class);
-        hlaskyActivityIntent.putExtra("key", "pustene"); //Optional parameters
         MainActivity.this.startActivity(hlaskyActivityIntent);
     }
 
     public void startOblubeneActivity(View view){
         Intent oblubeneActivityIntent = new Intent(MainActivity.this, OblubeneActivity.class);
-        oblubeneActivityIntent.putExtra("key", "pustene"); //Optional parameters
         MainActivity.this.startActivity(oblubeneActivityIntent);
     }
 
     public void startInfoActivity(View view){
         Intent infoActivityIntent = new Intent(MainActivity.this, InfoActivity.class);
-        infoActivityIntent.putExtra("key", "pustene"); //Optional parameters
         MainActivity.this.startActivity(infoActivityIntent);
     }
 
+    public void startPreferences(){
+        Intent preferencesActivityIntent = new Intent(MainActivity.this, PreferencesActivity.class);
+        MainActivity.this.startActivity(preferencesActivityIntent);
+    }
 
     //////////////////////////////MUSIC PLAYER//////////////////////////////
 

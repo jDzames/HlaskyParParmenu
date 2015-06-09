@@ -123,25 +123,29 @@ public class OblubeneFragment extends Fragment implements LoaderManager.LoaderCa
 
         TextView viewTitle = createTitleView();
 
+        String zmazat = getResources().getString(R.string.zmazat);
+        String zrusit = getResources().getString(R.string.zrusit);
+        String message = getResources().getString(R.string.delete_question);
         new AlertDialog.Builder(rootView.getContext())
-                .setMessage("Odstrániť hlášku: "+author+" - "+title+" spomedzi obľúbených?")
+                .setMessage(message + author+" - "+title+"?")
                 .setCustomTitle(viewTitle)
-                .setPositiveButton("Zmazať", new DialogInterface.OnClickListener() {
+                .setPositiveButton(zmazat, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         deleteOblubenu(id);
                     }
                 })
-                .setNegativeButton("Zrušiť", Defaults.DISMISS_ACTION)
+                .setNegativeButton(zrusit, Defaults.DISMISS_ACTION)
                 .show();
 
         return true;
     }
 
     private TextView createTitleView(){
+        String title = getResources().getString(R.string.title_zmazanie);
         TextView viewTitle = new TextView(rootView.getContext());
         viewTitle.setTextColor(getResources().getColor(R.color.accent_material_light));
-        viewTitle.setText("Zmazanie hlášky");
+        viewTitle.setText(title);
         viewTitle.setTextSize(20);
         viewTitle.setPadding(5,2,3,2);
         return viewTitle;
@@ -150,10 +154,11 @@ public class OblubeneFragment extends Fragment implements LoaderManager.LoaderCa
     private static AsyncQueryHandler deleteHandler;
 
     private void deleteOblubenu(long id){
+        final String messsage = getResources().getString(R.string.hlaska_odstranena);
         AsyncQueryHandler deleteHandler = new AsyncQueryHandler(rootView.getContext().getContentResolver()) {
             @Override
             protected void onDeleteComplete(int token, Object cookie, int result) {
-                Toast.makeText(rootView.getContext(), "Hláška bola odstránená z obľúbených", Toast.LENGTH_SHORT)
+                Toast.makeText(rootView.getContext(), messsage, Toast.LENGTH_SHORT)
                         .show();
             }
         };

@@ -43,7 +43,7 @@ public class InfoActivity extends FragmentActivity {
         try {
             actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
         }catch (NullPointerException e){
-            Log.wtf("INFO ACTIVITY ","tabs asi nepojdu");
+            //Log.wtf("INFO ACTIVITY ","tabs asi nepojdu");
         }
         // Create a tab listener that is called when the user changes tabs.
         ActionBar.TabListener tabListener = new ActionBar.TabListener() {

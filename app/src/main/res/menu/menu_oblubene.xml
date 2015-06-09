@@ -3,9 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="s.ics.upjs.sk.jdzama.hlaskyparparmenu.OblubeneActivity">
 
-    <item android:id="@+id/addOblubene" android:title="Pridať k obľúbeným"
+    <item android:id="@+id/addOblubene" android:title="@string/to_add_oblubene"
         android:orderInCategory="0" app:showAsAction="always" />
 
-    <item android:id="@+id/showOblubene" android:title="Ukázať obľúbené"
+    <item android:id="@+id/showOblubene" android:title="@string/ukazat_oblubene"
         android:orderInCategory="1" app:showAsAction="always" />
 </menu>

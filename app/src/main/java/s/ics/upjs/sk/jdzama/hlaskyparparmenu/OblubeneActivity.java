@@ -101,52 +101,57 @@ public class OblubeneActivity extends Activity {
     }
 
     private void askForShowOblubene() {
+        if (isShowingOblubene()){
+            return;
+        }
         TextView view = new TextView(getApplicationContext());
         view.setTextColor(getResources().getColor(R.color.accent_material_light));
-        view.setText("Zobraziť obľúbené");
+        view.setText(getString(R.string.ukazat_oblubene)+"?");
         view.setTextSize(20);
         view.setPadding(5, 2, 3, 2);
         view.setTextIsSelectable(false);
+        String ano = getResources().getString(R.string.ano);
+        String zrusit = getResources().getString(R.string.zrusit);
         new AlertDialog.Builder(this)
                 //.setTitle("Pridávanie a odstraňovanie")
                 .setCustomTitle(view)
-                .setMessage("Naozaj zobraziť obľúbené? (V okne, v ktorom sa práve nachádzate môžete klikaním " +
-                        "pridať hlášky k obľúbeným, v druhom okne môžte "+
-                        "odstrániť hlášku z obľúbených dlhším podržaním.)")
+                .setMessage(getString(R.string.zobrazit_oblubene_hint))
                 .setCancelable(false)
-                .setPositiveButton("Áno", new DialogInterface.OnClickListener() {
+                .setPositiveButton(ano, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         showOblubeneFragment();
                     }
                 })
-                .setNegativeButton("Nie", Defaults.DISMISS_ACTION)
+                .setNegativeButton(zrusit, Defaults.DISMISS_ACTION)
                 .show();
     }
 
     private void askForAdd() {
+        if (!isShowingOblubene()){
+            return;
+        }
         TextView view = new TextView(getApplicationContext());
         view.setTextColor(getResources().getColor(R.color.accent_material_light));
-        view.setText("Pridávanie k obľúbeným");
+        view.setText(getString(R.string.zobrazit_pridavanie_title));
         view.setTextSize(20);
         view.setPadding(5,2,3,2);
         view.setTextIsSelectable(false);
+        String ano = getResources().getString(R.string.ano);
+        String zrusit = getResources().getString(R.string.zrusit);
+        String message = getResources().getString(R.string.prejst_na_pridavanie_hint);
         new AlertDialog.Builder(this)
                 //.setTitle("Pridávanie a odstraňovanie")
                 .setCustomTitle(view)
-                .setMessage("Prejsť na pridávanie k obľúbeným? (V okne, v ktorom sa práve nachádzate môžete " +
-                        "odstrániť hlášku z obľúbených dlhším podržaním, v druhom okne môžte klikaním " +
-                        "pridať hlášky k obľúbeným.)")
+                .setMessage(message)
                 .setCancelable(false)
-                .setPositiveButton("Áno", new DialogInterface.OnClickListener() {
+                .setPositiveButton(ano, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         showAddOblubeneFragment();
                     }
                 })
-                .setNegativeButton("Nie", Defaults.DISMISS_ACTION)
+                .setNegativeButton(zrusit, Defaults.DISMISS_ACTION)
                 .show();
     }
-
-
 }
