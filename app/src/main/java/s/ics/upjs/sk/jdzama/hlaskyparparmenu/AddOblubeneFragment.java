@@ -80,8 +80,10 @@ public class AddOblubeneFragment extends Fragment implements AdapterView.OnItemC
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
         //view.setBackgroundColor(getResources().getColor(R.color.accent_material_light));
         Song thisSong = myList.get(i);
-        thisSong.setJeOblubena(true);
-        insertIntoContentProvider(thisSong);
+        if (!thisSong.isJeOblubena()) {
+            thisSong.setJeOblubena(true);
+            insertIntoContentProvider(thisSong);
+        }
     }
 
     //podla ics.upjs.sk/~novotnyr/android/5-stretnutie-zlte-poznamkove-papieriky.html

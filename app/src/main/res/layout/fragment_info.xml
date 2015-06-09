@@ -1,0 +1,19 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="s.ics.upjs.sk.jdzama.hlaskyparparmenu.InfoFragment">
+
+    <GridView
+        android:id="@+id/youtubeGridView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:numColumns="auto_fit"
+        android:columnWidth="120dp"
+        android:padding="2dp"
+        android:verticalSpacing="10dp"
+        android:horizontalSpacing="10dp"
+        android:listSelector="@null"
+        android:background="@drawable/youtube"
+        />
+
+</FrameLayout>

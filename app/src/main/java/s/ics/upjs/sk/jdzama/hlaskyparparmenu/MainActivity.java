@@ -295,6 +295,12 @@ public class MainActivity extends Activity implements MediaPlayerControl {
         MainActivity.this.startActivity(oblubeneActivityIntent);
     }
 
+    public void startInfoActivity(View view){
+        Intent infoActivityIntent = new Intent(MainActivity.this, InfoActivity.class);
+        infoActivityIntent.putExtra("key", "pustene"); //Optional parameters
+        MainActivity.this.startActivity(infoActivityIntent);
+    }
+
 
     //////////////////////////////MUSIC PLAYER//////////////////////////////
 

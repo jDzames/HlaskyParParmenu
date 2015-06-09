@@ -51,6 +51,8 @@ public class OblubeneFragment extends Fragment implements LoaderManager.LoaderCa
         // Inflate the layout for this fragment
         rootView = inflater.inflate(R.layout.fragment_oblubene, container, false);
 
+        this.setRetainInstance(true);
+
         getLoaderManager().initLoader(OBLUBENE_LOADER_ID, Bundle.EMPTY, this);
 
         ListView listOblubene = (ListView) rootView.findViewById(R.id.listOblubene);
@@ -58,8 +60,9 @@ public class OblubeneFragment extends Fragment implements LoaderManager.LoaderCa
         listOblubene.setOnItemClickListener(this);
         listOblubene.setOnItemLongClickListener(this);
 
-        player = new MediaPlayer();
-
+        if (player==null) {
+            player = new MediaPlayer();
+        }
         return rootView;
     }
 
