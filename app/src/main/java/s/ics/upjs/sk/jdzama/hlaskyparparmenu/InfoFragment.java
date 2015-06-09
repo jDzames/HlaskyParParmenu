@@ -1,12 +1,10 @@
 package s.ics.upjs.sk.jdzama.hlaskyparparmenu;
 
-import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,7 +12,6 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.GridView;
-import android.widget.ShareActionProvider;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -39,13 +36,7 @@ public class InfoFragment extends Fragment implements AdapterView.OnItemClickLis
                              ViewGroup container, Bundle savedInstanceState) {
         // The last two arguments ensure LayoutParams are inflated
         // properly.
-        rootView = inflater.inflate(
-                R.layout.fragment_info, container, false);
-        Bundle args = getArguments();
-        if (args==null) {
-            Log.wtf("INFO FRAGMENT", "args su null");
-        }
-        int whichFr = args.getInt(ARG_OBJECT);
+        rootView = inflater.inflate(R.layout.fragment_info, container, false);
 
         makeLinksList();
 
@@ -93,10 +84,10 @@ public class InfoFragment extends Fragment implements AdapterView.OnItemClickLis
             if (intent.resolveActivity(rootView.getContext().getPackageManager()) != null) {
                 startActivity(intent);
             }else{
-                Toast.makeText(rootView.getContext(), "Nenašla sa vhodná aplikácia.", Toast.LENGTH_SHORT);
+                Toast.makeText(rootView.getContext(), "Nenašla sa vhodná aplikácia.", Toast.LENGTH_SHORT).show();
             }
         }catch (Exception ex){
-            Toast.makeText(rootView.getContext(), "Nastala chyba.", Toast.LENGTH_SHORT);
+            Toast.makeText(rootView.getContext(), "Nastala chyba.", Toast.LENGTH_SHORT).show();
         }
     }
 

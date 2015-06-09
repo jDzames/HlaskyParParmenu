@@ -86,7 +86,7 @@ public class InfoActivity extends FragmentActivity {
                     return fragment1;
                 case 1: Fragment fragment2 = new WebFragment();
                     return fragment2;
-                case 2: Fragment fragment3 = new InfoFragment();
+                case 2: Fragment fragment3 = new AutorFragment();
                     return fragment3;
             }
             return null;

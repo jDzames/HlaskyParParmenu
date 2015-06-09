@@ -2,24 +2,47 @@
 <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/web"
     android:stretchColumns="1">
     <TableRow>
-        <TextView
-            android:text="@string/table_layout_4_open"
-            android:padding="3dip" />
-        <TextView
-            android:text="@string/table_layout_4_open_shortcut"
-            android:gravity="right"
-            android:padding="3dip" />
+        <Button
+            android:id="@+id/banda"
+            android:text="Banda Trotlu"
+            android:textSize="18sp"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="7dip"/>
+        <Button
+            android:id="@+id/wiki"
+            android:text="Wikipedia"
+            android:textSize="18sp"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="7dip"/>
     </TableRow>
 
     <TableRow>
-        <TextView
-            android:text="@string/table_layout_4_save"
-            android:padding="3dip" />
-        <TextView
-            android:text="@string/table_layout_4_save_shortcut"
-            android:gravity="right"
-            android:padding="3dip" />
+        <Button
+            android:id="@+id/fb"
+            android:text="Facebook"
+            android:textSize="18sp"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="7dip"/>
+        <Button
+            android:id="@+id/necyklopedia"
+            android:text="Necyklopedia"
+            android:textSize="18sp"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="7dip"/>
     </TableRow>
 </TableLayout>

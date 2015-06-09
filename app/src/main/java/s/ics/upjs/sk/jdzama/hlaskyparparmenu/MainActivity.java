@@ -34,7 +34,6 @@ public class MainActivity extends Activity implements MediaPlayerControl {
     private boolean paused=false, playbackPaused=false;
 
     private Intent playIntent;
-    private Button hlaskyBtn;
     private View controlerView;
 
     public final String SAVED_STATE = "savedState";
@@ -50,10 +49,7 @@ public class MainActivity extends Activity implements MediaPlayerControl {
         getActionBar().setDisplayShowHomeEnabled(false);
         setContentView(R.layout.activity_main);
 
-
-
-        hlaskyBtn = (Button) findViewById(R.id.hlasky);
-        controlerView = (View) findViewById(R.id.player_control);
+        controlerView = findViewById(R.id.player_control);
         songInfo = (TextView) findViewById(R.id.songInfo);
         setTextView();
 
@@ -68,7 +64,6 @@ public class MainActivity extends Activity implements MediaPlayerControl {
         } else {
             restoreMusicState(savedInstanceState);
         }
-        Log.wtf("ACTIVITY: ","CREATED ");
     }
 
     private void setTextView(){
@@ -87,10 +82,7 @@ public class MainActivity extends Activity implements MediaPlayerControl {
     }
 
     private void restoreMusicState(Bundle savedInstanceState) {
-
         data = (SaveData) savedInstanceState.get(SAVED_STATE);
-
-        Log.wtf("ACTIVITY: ","RESTORUJEM ");
         //prepareService();
     }
 
@@ -103,7 +95,6 @@ public class MainActivity extends Activity implements MediaPlayerControl {
     @Override
     protected void onStart() {
         super.onStart();
-        Log.wtf("ACTIVITY: ","on start");
 
     }
     @Override
@@ -116,7 +107,6 @@ public class MainActivity extends Activity implements MediaPlayerControl {
             start();
             controller.show(0);
         }
-        Log.wtf("ACTIVITY: ", "som po RESUME ");
     }
 
     @Override
@@ -124,7 +114,6 @@ public class MainActivity extends Activity implements MediaPlayerControl {
 
 
         if (musicService!= null && musicService.getPosn() < musicService.getDur()){
-            Log.wtf("ACTIVITY: ","SAVEUJEM");
             data = new SaveData(musicService.getSong(), musicService.getPosn());
             outState.putSerializable(SAVED_STATE, data);
         }
@@ -135,20 +124,17 @@ public class MainActivity extends Activity implements MediaPlayerControl {
     protected void onPause(){
         paused=true;
 
-        Log.wtf("ACTIVITY: ","som po PAUSE ");
         super.onPause();
     }
 
     @Override
     protected void onStop() {
         stopPlaying();
-        Log.wtf("ACTIVITY: ", "som v STOP ");
         super.onStop();
     }
 
     @Override
     protected void onDestroy() {
-        Log.wtf("ACTIVITY: ", "som v DESTROY ");
         unregisterReceiver(myReceiver);
         super.onDestroy();
     }
@@ -197,14 +183,12 @@ public class MainActivity extends Activity implements MediaPlayerControl {
         controller.setMediaPlayer(this);
         controller.setAnchorView(controlerView);
         controller.setEnabled(true);
-        Log.wtf("ACTIVITY: ","controller");
     }
     private void prepareService(){
         if(playIntent==null){
             playIntent = new Intent(this, MusicService.class);
             bindService(playIntent, musicConnection, Context.BIND_AUTO_CREATE);
             //startService(playIntent);
-            Log.wtf("ACTIVITY: ","player bound");
         }
     }
 
@@ -237,7 +221,6 @@ public class MainActivity extends Activity implements MediaPlayerControl {
             //pass list
             musicService.setList(songList);
             musicBound = true;
-            Log.wtf("SERVICE CONNECTION: ","mam service ready");
             startPlaying();
         }
 
