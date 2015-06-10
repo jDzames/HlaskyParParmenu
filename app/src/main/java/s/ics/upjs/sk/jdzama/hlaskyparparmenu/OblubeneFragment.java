@@ -11,9 +11,11 @@ import android.content.CursorLoader;
 import android.content.DialogInterface;
 import android.content.Loader;
 import android.database.Cursor;
+import android.graphics.Color;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -80,7 +82,75 @@ public class OblubeneFragment extends Fragment implements LoaderManager.LoaderCa
         String[] from = {Provider.Oblubene.NAZOV, Provider.Oblubene.AUTOR};
         int[] to = {R.id.oblubeneListViewTitle, R.id.oblubeneListViewAthor};
         this.adapter = new SimpleCursorAdapter(rootView.getContext(), R.layout.oblubene, Defaults.NO_CURSOR, from, to, Defaults.NO_FLAGS);
+        this.adapter.setViewBinder(new MyViewBinder());
         return this.adapter;
+    }
+
+    //podla http://developer.android.com/reference/android/widget/SimpleCursorAdapter.ViewBinder.html#setViewValue%28android.view.View,%20android.database.Cursor,%20int%29
+   //a podla http://stackoverflow.com/questions/7628824/using-viewbinder-for-a-custom-listview-item-with-textview
+
+    private class MyViewBinder implements  SimpleCursorAdapter.ViewBinder{
+
+        @Override
+        public boolean setViewValue(View view, Cursor cursor, int columnIndex) {
+
+            int viewId = view.getId();
+            switch(viewId) {
+                case R.id.oblubeneListViewTitle:
+                    return false;
+                case R.id.oblubeneListViewAthor:
+                    TextView autorView = (TextView) view;
+                    String cursorColumnData = cursor.getString(columnIndex);
+                    switch(cursorColumnData) {
+                        case "Bobromil":
+                            autorView.setBackgroundColor(Color.CYAN);
+                            autorView.setText(cursorColumnData);
+                            return true;
+                        case "Hobitofil":
+                            autorView.setBackgroundColor(Color.rgb(70,170,200));
+                            autorView.setText(cursorColumnData);
+                            return true;
+                        case "Fritol":
+                            autorView.setBackgroundColor(Color.rgb(230,250,50));
+                            autorView.setText(cursorColumnData);
+                            return true;
+                        case "Šmajdalf":
+                            autorView.setBackgroundColor(Color.rgb(243,91,36));
+                            autorView.setText(cursorColumnData);
+                            return true;
+                        case "Bimbo":
+                            autorView.setBackgroundColor(Color.rgb(91,243,126));
+                            autorView.setText(cursorColumnData);
+                            return true;
+                        case "Chobot":
+                            autorView.setBackgroundColor(Color.rgb(252,84,84));
+                            autorView.setText(cursorColumnData);
+                            return true;
+                        case "Elrond":
+                            autorView.setBackgroundColor(Color.rgb(222,125,51));
+                            autorView.setText(cursorColumnData);
+                            return true;
+                        case "Bbbbb":
+                            autorView.setBackgroundColor(Color.rgb(172,87,247));
+                            autorView.setText(cursorColumnData);
+                            return true;
+                        case "Pajzl":
+                            autorView.setBackgroundColor(Color.rgb(87,247,183));
+                            autorView.setText(cursorColumnData);
+                            return true;
+                        case "Legoland":
+                            autorView.setBackgroundColor(Color.rgb(190,190,190));
+                            autorView.setText(cursorColumnData);
+                            return true;
+                        case "Barman":
+                            autorView.setBackgroundColor(Color.rgb(228,10,112));
+                            autorView.setText(cursorColumnData);
+                            return true;
+                    }
+                    break;
+            }
+            return false;
+        }
     }
 
 
@@ -151,7 +221,6 @@ public class OblubeneFragment extends Fragment implements LoaderManager.LoaderCa
         return viewTitle;
     }
 
-    private static AsyncQueryHandler deleteHandler;
 
     private void deleteOblubenu(long id){
         final String messsage = getResources().getString(R.string.hlaska_odstranena);

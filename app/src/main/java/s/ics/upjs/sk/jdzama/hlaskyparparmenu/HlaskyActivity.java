@@ -82,7 +82,6 @@ public class HlaskyActivity extends Activity {
             @Override
             public void onDrawerClosed(View drawerView) {
                 super.onDrawerClosed(drawerView);
-                Log.d(TAG, "onDrawerClosed: " + getTitle());
 
                 invalidateOptionsMenu();
             }
@@ -169,7 +168,6 @@ public class HlaskyActivity extends Activity {
         //noinspection SimplifiableIfStatement
         if (mDrawerToggle.onOptionsItemSelected(item)){
             //klikol som na burger
-            Log.wtf("HlaskyActivity: ","klik na burger");
             return false;
         }
 

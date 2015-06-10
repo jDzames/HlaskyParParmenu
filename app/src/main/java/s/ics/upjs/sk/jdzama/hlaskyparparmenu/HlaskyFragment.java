@@ -26,7 +26,6 @@ public class HlaskyFragment extends Fragment implements AdapterView.OnItemClickL
     public static final String ARG_INDEX = "INDEX";
     private static final String SAVED_STATE = "save_data";
     private int positionInList;
-    private ListView hlaskyListView;
     private View rootView;
     private List<Song> myHlaskyList;
     private MediaPlayer player;
@@ -76,7 +75,7 @@ public class HlaskyFragment extends Fragment implements AdapterView.OnItemClickL
         }
         myHlaskyList = HlaskyList.INSTANCE.hlaskyRefs[positionInList];
 
-        hlaskyListView = (ListView) rootView.findViewById(R.id.hlaskyListView);
+        ListView hlaskyListView = (ListView) rootView.findViewById(R.id.hlaskyListView);
 
         //http://stackoverflow.com/questions/11256563/how-to-set-both-lines-of-a-listview-using-simple-list-item-2
         ArrayAdapter<Song> hlaskyAdapter = new ArrayAdapter<Song>(getActivity(), android.R.layout.simple_list_item_2, android.R.id.text1, myHlaskyList){

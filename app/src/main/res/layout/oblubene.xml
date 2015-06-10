@@ -13,7 +13,7 @@
         android:padding="2dp"
         android:textStyle="bold"
         android:textSize="20sp"
-        android:textColor="@color/accent_material_dark"
+        android:textColor="@color/background_material_light"
         />
     <TextView
         android:id="@+id/oblubeneListViewAthor"
@@ -21,8 +21,8 @@
         android:layout_height="wrap_content"
         android:padding="2dp"
         android:textSize="16sp"
-        android:background="@color/highlighted_text_material_light"
         android:textColor="@color/background_material_dark"
+        android:background="@color/background_material_light"
         />
 
 </LinearLayout>
