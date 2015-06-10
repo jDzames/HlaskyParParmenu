@@ -18,9 +18,6 @@ import android.widget.TextView;
 import java.util.List;
 
 
-/**
- * A simple {@link Fragment} subclass.
- */
 public class HlaskyFragment extends Fragment implements AdapterView.OnItemClickListener {
 
     public static final String ARG_INDEX = "INDEX";
@@ -30,7 +27,6 @@ public class HlaskyFragment extends Fragment implements AdapterView.OnItemClickL
     private List<Song> myHlaskyList;
     private MediaPlayer player;
     private int songChosen;
-    private boolean configChanged=false;
     private SaveData data;
 
     public HlaskyFragment() {

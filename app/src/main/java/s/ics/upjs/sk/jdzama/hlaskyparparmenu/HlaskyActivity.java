@@ -27,6 +27,7 @@ import java.util.ArrayList;
 
 public class HlaskyActivity extends Activity {
 
+    public static final String POSITION = "POSITION";
     private static String TAG = HlaskyActivity.class.getSimpleName();
     private static final String HLASKY_FRAGMENT = "hlasky_fragment";
 
@@ -108,13 +109,13 @@ public class HlaskyActivity extends Activity {
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
-        outState.putInt("POSITION", positionFragment);
+        outState.putInt(POSITION, positionFragment);
         super.onSaveInstanceState(outState);
     }
 
     protected void restoreInstanceState(Bundle savedInstanceState) {
         if (savedInstanceState!=null){
-            positionFragment = (int) savedInstanceState.get("POSITION");
+            positionFragment = (int) savedInstanceState.get(POSITION);
         }
     }
 
@@ -152,9 +153,6 @@ public class HlaskyActivity extends Activity {
     }
 
 
-
-
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -170,12 +168,20 @@ public class HlaskyActivity extends Activity {
             //klikol som na burger
             return false;
         }
-
         return false;
     }
 
     public void backToMainActivity(View view) {
         this.finish();
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (mDrawerLayout.isDrawerOpen(mDrawerPane)){
+            mDrawerLayout.closeDrawer(mDrawerPane);
+        }else{
+            super.onBackPressed();
+        }
     }
 
     public class NavItem {
